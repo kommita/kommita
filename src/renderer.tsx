@@ -3,7 +3,7 @@
 import { createRoot } from 'react-dom/client';
 import { App } from './Ui/App';
 
-const root = createRoot(document.getElementById('app'));
-if (!root) throw new Error('No root element found');
+const appElement = document.getElementById('app');
+if (!appElement) throw new Error('No app element found');
 
-root.render(<App/>);
+createRoot(appElement).render(<App/>);
