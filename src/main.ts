@@ -1,12 +1,12 @@
 import { app, BrowserWindow } from 'electron';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { handleStartup } from './core/common/start';
+import { onStartup } from './core/common/AppEvent';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-handleStartup();
+onStartup();
 
 const createWindow = () => {
     // Create the browser window.
