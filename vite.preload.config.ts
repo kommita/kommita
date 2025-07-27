@@ -9,9 +9,7 @@ export default defineConfig({
         lib: {
             formats: ['es'],
             entry: 'src/preload.ts',
+            fileName: 'preload'
         },
-        rollupOptions: {
-            output: { entryFileNames: 'preload.js' }
-        }
     }
 });

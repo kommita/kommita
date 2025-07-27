@@ -9,11 +9,7 @@ export default defineConfig({
         lib: {
             formats: ['es'],
             entry: 'src/main.ts',
+            fileName: 'main'
         },
-        rollupOptions: {
-            output: {
-                entryFileNames: 'main.js'
-            }
-        }
     }
 });
