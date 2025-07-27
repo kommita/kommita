@@ -1,3 +1,6 @@
+/* eslint-disable */
+// @ts-nocheck
+
 import { defineConfig } from 'vite';
 
 // https://vitejs.dev/config
