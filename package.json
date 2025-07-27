@@ -1,5 +1,6 @@
 {
   "name": "kommita",
+  "type": "module",
   "productName": "kommita",
   "version": "1.0.0",
   "description": "My Electron application description",
