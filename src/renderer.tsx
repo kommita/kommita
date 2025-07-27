@@ -1,3 +1,7 @@
 // To learn more about the differences between the "main" and the "renderer" context in Electron, visit:
 // https://electronjs.org/docs/tutorial/process-model
-import './index.css';
+import { createRoot } from 'react-dom/client';
+import { App } from './Ui/App';
+
+const root = createRoot(document.getElementById('app'));
+root.render(<App/>);
