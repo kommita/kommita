@@ -1,26 +1,9 @@
-import { app, BrowserWindow } from 'electron';
-import { createWindow } from './core/MainWindow';
+import { app } from 'electron';
+import { createWindow, quit, reCreateWindow } from './core/MainWindow';
 import { handleWindowsShortcuts } from './core/windows/ShortcutHandler';
 
 handleWindowsShortcuts();
+
 app.on('ready', createWindow);
-
-// Quit when all windows are closed, except on macOS. There, it's common
-// for applications and their menu bar to stay active until the user quits
-// explicitly with Cmd + Q.
-app.on('window-all-closed', () => {
-    if (process.platform !== 'darwin') {
-        app.quit();
-    }
-});
-
-app.on('activate', async () => {
-    // On OS X it's common to re-create a window in the app when the
-    // dock icon is clicked and there are no other windows open.
-    if (BrowserWindow.getAllWindows().length === 0) {
-        await createWindow();
-    }
-});
-
-// In this file you can include the rest of your app's specific main process
-// code. You can also put them in separate files and import them here.
+app.on('window-all-closed', quit);
+app.on('activate', reCreateWindow);
