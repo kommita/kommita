@@ -1,6 +1,6 @@
 import { app, BrowserWindow } from 'electron';
 import path from 'node:path';
-import { filesystemConfig } from '../../config';
+import { appConfig, filesystemConfig } from '../../config';
 
 export async function createWindow() {
     const mainWindow = new BrowserWindow({
@@ -18,8 +18,8 @@ export async function createWindow() {
         await mainWindow.loadFile(path.join(filesystemConfig.rootDir, `../renderer/${MAIN_WINDOW_VITE_NAME}/index.html`));
     }
 
-    // Open the DevTools.
-    mainWindow.webContents.openDevTools();
+    // Open the DevTools if in development mode
+    if (appConfig.env === 'development') mainWindow.webContents.openDevTools();
 }
 
 export function quit() {
