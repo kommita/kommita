@@ -1,15 +1,8 @@
 import { app, BrowserWindow } from 'electron';
-import started from 'electron-squirrel-startup';
 import { createWindow } from './core/MainWindow';
+import { handleWindowsShortcuts } from './core/windows/ShortcutHandler';
 
-// Handle creating/removing shortcuts on Windows when installing/uninstalling.
-if (started) {
-    app.quit();
-}
-
-// This method will be called when Electron has finished
-// initialization and is ready to create browser windows.
-// Some APIs can only be used after this event occurs.
+handleWindowsShortcuts();
 app.on('ready', createWindow);
 
 // Quit when all windows are closed, except on macOS. There, it's common
