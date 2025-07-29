@@ -19,12 +19,18 @@ jobs:
           node-version: '22'
       - run: npm ci
       - run: npm run make
+      - run: |
+          for file in out/*.{deb,rpm}; do
+              if [ -f "$file" ]; then
+              mv "$file" "${file%/*}/Kommita-${GITHUB_REF##*/}-${GITHUB_SHA::7}.${file##*.}"
+              fi
+          done
       - uses: softprops/action-gh-release@v2
         with:
           files: |
             out/**/*.deb
             out/**/*.rpm
-          tag_name: 0.1
+          tag_name: 0.2
         env:
           GITHUB_TOKEN: ${{ secrets.PA_TOKEN }}
 
@@ -37,11 +43,17 @@ jobs:
           node-version: '22'
       - run: npm ci
       - run: npm run make
+      - run: |
+          for file in out/*.zip; do
+              if [ -f "$file" ]; then
+              mv "$file" "${file%/*}/Kommita-${GITHUB_REF##*/}-${GITHUB_SHA::7}.zip"
+              fi
+          done
       - uses: softprops/action-gh-release@v2
         with:
           files: |
             out/**/*.zip
-          tag_name: 0.1
+          tag_name: 0.2
         env:
           GITHUB_TOKEN: ${{ secrets.PA_TOKEN }}
 
@@ -54,10 +66,16 @@ jobs:
           node-version: '22'
       - run: npm ci
       - run: npm run make
+      - run: |
+          for file in out/*Setup*.exe; do
+              if [ -f "$file" ]; then
+              mv "$file" "${file%/*}/Kommita-${GITHUB_REF##*/}-${GITHUB_SHA::7}Setup.exe"
+              fi
+          done
       - uses: softprops/action-gh-release@v2
         with:
           files: |
-            out/**/*kommita*setup*.exe
-          tag_name: 0.1
+            out/**/*kommita*Setup*.exe
+          tag_name: 0.2
         env:
           GITHUB_TOKEN: ${{ secrets.PA_TOKEN }}
