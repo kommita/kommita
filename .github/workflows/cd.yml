@@ -13,7 +13,7 @@ jobs:
       - run: npm run make
       - uses: actions/upload-artifact@v4
         with:
-          name: ${event.repository.name}-${{ github.sha }}
+          name: ${{event.repository.name}}-${{ github.sha }}
           path: out
 
   release:
@@ -23,3 +23,8 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           path: out/
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: out/**/*
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
