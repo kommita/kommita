@@ -39,6 +39,7 @@ jobs:
         with:
           files: |
             out/**/*.zip
+          tag_name: 0.1
 
   build-windows:
     runs-on: windows-latest
