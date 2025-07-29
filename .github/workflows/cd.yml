@@ -35,10 +35,9 @@ jobs:
           node-version: '22'
       - run: npm ci
       - run: npm run make
-      - uses: actions/upload-artifact@v4
+      - uses: softprops/action-gh-release@v2
         with:
-          name: Kommita-${{ github.ref_name }}-macos-${{ github.sha }}
-          path: |
+          files: |
             out/**/*.zip
 
   build-windows:
@@ -69,7 +68,6 @@ jobs:
           files: |
             out/**/kommita*.deb
             out/**/kommita*.rpm
-            out/**/kommita*.zip
             out/**/kommita*.exe
           tag_name: 0.0.0.1
         #          tag_name: ${{ github.ref_name }}
