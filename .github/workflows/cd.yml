@@ -1,8 +1,6 @@
 name: CD
 on:
   push:
-    branches:
-      - cd
     tags:
       - '*'
 
@@ -60,10 +58,8 @@ jobs:
         with:
           path: out/
       - uses: softprops/action-gh-release@v2
-        #        if: github.ref_type == 'tag'
         with:
           files: out/**/*
-          #          tag_name: ${{ github.ref_name }}
-          tag_name: 0.0.0
+          tag_name: ${{ github.ref_name }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
