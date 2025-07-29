@@ -19,12 +19,14 @@ jobs:
           node-version: '22'
       - run: npm ci
       - run: npm run make
-      - uses: actions/upload-artifact@v4
+      - uses: softprops/action-gh-release@v2
         with:
-          name: Kommita-${{ github.ref_name }}-linux-${{ github.sha }}
-          path: |
+          files: |
             out/**/*.deb
             out/**/*.rpm
+          tag_name: 0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.PA_TOKEN }}
 
   build-macos:
     runs-on: macos-latest
@@ -58,21 +60,21 @@ jobs:
           path: |
             out/**/*.exe
 
-  release:
-    runs-on: ubuntu-latest
-    needs: [ build-linux, build-macos, build-windows ]
-    steps:
-      - uses: actions/download-artifact@v4
-        with:
-          path: out/
-          merge-multiple: true
-      - uses: softprops/action-gh-release@v2
-        with:
-          files: |
-            out/**/kommita*.deb
-            out/**/kommita*.rpm
-            out/**/kommita*.exe
-          tag_name: 0.1
-        #          tag_name: ${{ github.ref_name }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.PA_TOKEN }}
+#  release:
+#    runs-on: ubuntu-latest
+#    needs: [ build-linux, build-macos, build-windows ]
+#    steps:
+#      - uses: actions/download-artifact@v4
+#        with:
+#          path: out/
+#          merge-multiple: true
+#      - uses: softprops/action-gh-release@v2
+#        with:
+#          files: |
+#            out/**/kommita*.deb
+#            out/**/kommita*.rpm
+#            out/**/kommita*.exe
+#          tag_name: 0.1
+#        #          tag_name: ${{ github.ref_name }}
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.PA_TOKEN }}
