@@ -3,10 +3,6 @@ on:
   push:
     tags:
       - '*'
-
-## -- The build jobs --
-## ![ NOTE ] The build job that uses a strategy matrix gets queued indefinitely.
-## To resolve this issue, we can split the jobs into separate jobs for each operating system.
 jobs:
   build-linux:
     runs-on: ubuntu-latest
