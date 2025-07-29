@@ -24,20 +24,20 @@ jobs:
           path: |
             out/**/*.deb
             out/**/*.rpm
-  #
-  #  build-macos:
-  #    runs-on: macos-latest
-  #    steps:
-  #      - uses: actions/checkout@v4
-  #      - uses: actions/setup-node@v4
-  #        with:
-  #          node-version: '22'
-  #      - run: npm ci
-  #      - run: npm run make
-  #      - uses: actions/upload-artifact@v4
-  #        with:
-  #          name: Kommita-${{ github.ref_name }}-macos-${{ github.sha }}
-  #          path: out
+
+  build-macos:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm ci
+      - run: npm run make
+      - uses: actions/upload-artifact@v4
+        with:
+          path: |
+            out/**/*.zip
   #
   #  build-windows:
   #    runs-on: windows-latest
@@ -55,7 +55,7 @@ jobs:
 
   release:
     runs-on: ubuntu-latest
-    needs: [ build-linux ]
+    needs: [ build-linux, build-macos ]
     #    needs: [ build-linux, build-macos, build-windows ]
     steps:
       - uses: actions/download-artifact@v4
@@ -67,6 +67,7 @@ jobs:
           files: |
             out/**/*.deb
             out/**/*.rpm
+            out/**/*.zip
           tag_name: 0.0.0.0
         #          tag_name: ${{ github.ref_name }}
         env:
