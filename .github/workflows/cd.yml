@@ -23,38 +23,39 @@ jobs:
         with:
           name: Kommita-${{ github.ref_name }}-linux-${{ github.sha }}
           path: out
-
-  build-macos:
-    runs-on: macos-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-      - run: npm ci
-      - run: npm run make
-      - uses: actions/upload-artifact@v4
-        with:
-          name: Kommita-${{ github.ref_name }}-macos-${{ github.sha }}
-          path: out
-
-  build-windows:
-    runs-on: windows-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-      - run: npm ci
-      - run: npm run make
-      - uses: actions/upload-artifact@v4
-        with:
-          name: Kommita-${{ github.ref_name }}-windows-${{ github.sha }}
-          path: out
+  #
+  #  build-macos:
+  #    runs-on: macos-latest
+  #    steps:
+  #      - uses: actions/checkout@v4
+  #      - uses: actions/setup-node@v4
+  #        with:
+  #          node-version: '22'
+  #      - run: npm ci
+  #      - run: npm run make
+  #      - uses: actions/upload-artifact@v4
+  #        with:
+  #          name: Kommita-${{ github.ref_name }}-macos-${{ github.sha }}
+  #          path: out
+  #
+  #  build-windows:
+  #    runs-on: windows-latest
+  #    steps:
+  #      - uses: actions/checkout@v4
+  #      - uses: actions/setup-node@v4
+  #        with:
+  #          node-version: '22'
+  #      - run: npm ci
+  #      - run: npm run make
+  #      - uses: actions/upload-artifact@v4
+  #        with:
+  #          name: Kommita-${{ github.ref_name }}-windows-${{ github.sha }}
+  #          path: out
 
   release:
     runs-on: ubuntu-latest
-    needs: [ build-linux, build-macos, build-windows ]
+    needs: [ build-linux ]
+    #    needs: [ build-linux, build-macos, build-windows ]
     steps:
       - uses: actions/download-artifact@v4
         with:
@@ -63,6 +64,7 @@ jobs:
       - uses: softprops/action-gh-release@v2
         with:
           files: out/**/*
-          tag_name: ${{ github.ref_name }}
+          tag_name: 0.0.0
+        #          tag_name: ${{ github.ref_name }}
         env:
           GITHUB_TOKEN: ${{ secrets.PA_TOKEN }}
