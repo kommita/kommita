@@ -53,19 +53,21 @@ jobs:
   #          name: Kommita-${{ github.ref_name }}-windows-${{ github.sha }}
   #          path: out
 
-#  release:
-#    runs-on: ubuntu-latest
-#    needs: [ build-linux ]
-#    #    needs: [ build-linux, build-macos, build-windows ]
-#    steps:
-#      - uses: actions/download-artifact@v4
-#        with:
-#          path: out/
-#          merge-multiple: true
-#      - uses: softprops/action-gh-release@v2
-#        with:
-#          files: out/**/*.zip
-#          tag_name: 0.0.0.0
-#        #          tag_name: ${{ github.ref_name }}
-#        env:
-#          GITHUB_TOKEN: ${{ secrets.PA_TOKEN }}
+  release:
+    runs-on: ubuntu-latest
+    needs: [ build-linux ]
+    #    needs: [ build-linux, build-macos, build-windows ]
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: out/
+          merge-multiple: true
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            out/**/*.deb
+            out/**/*.rpm
+          tag_name: 0.0.0.0
+        #          tag_name: ${{ github.ref_name }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.PA_TOKEN }}
