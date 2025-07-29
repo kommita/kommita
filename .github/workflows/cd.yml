@@ -21,10 +21,10 @@ jobs:
       - run: npm run make
       - uses: actions/upload-artifact@v4
         with:
+          name: Kommita-${{ github.ref_name }}-linux-${{ github.sha }}
           path: |
             out/**/*.deb
             out/**/*.rpm
-          name: Kommita-${{ github.ref_name }}-linux-${{ github.sha }}
 
   build-macos:
     runs-on: macos-latest
@@ -37,23 +37,23 @@ jobs:
       - run: npm run make
       - uses: actions/upload-artifact@v4
         with:
+          name: Kommita-${{ github.ref_name }}-macos-${{ github.sha }}
           path: |
             out/**/*.zip
-          name: Kommita-${{ github.ref_name }}-macos-${{ github.sha }}
-  #
-  #  build-windows:
-  #    runs-on: windows-latest
-  #    steps:
-  #      - uses: actions/checkout@v4
-  #      - uses: actions/setup-node@v4
-  #        with:
-  #          node-version: '22'
-  #      - run: npm ci
-  #      - run: npm run make
-  #      - uses: actions/upload-artifact@v4
-  #        with:
-  #          name: Kommita-${{ github.ref_name }}-windows-${{ github.sha }}
-  #          path: out
+
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm ci
+      - run: npm run make
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Kommita-${{ github.ref_name }}-windows-${{ github.sha }}
+          path: out
 
   release:
     runs-on: ubuntu-latest
