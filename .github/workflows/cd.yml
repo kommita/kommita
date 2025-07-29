@@ -69,7 +69,7 @@ jobs:
             out/**/kommita*.deb
             out/**/kommita*.rpm
             out/**/kommita*.exe
-          tag_name: 0.0.0.1
+          tag_name: 0.1
         #          tag_name: ${{ github.ref_name }}
         env:
           GITHUB_TOKEN: ${{ secrets.PA_TOKEN }}
