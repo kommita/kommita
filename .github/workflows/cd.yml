@@ -3,10 +3,6 @@ on:
   push:
     tags:
       - '*'
-
-## -- The build jobs --
-## ![ NOTE ] The build job that uses a strategy matrix gets queued indefinitely.
-## To resolve this issue, we can split the jobs into separate jobs for each operating system.
 jobs:
   build-linux:
     runs-on: ubuntu-latest
@@ -17,10 +13,14 @@ jobs:
           node-version: '22'
       - run: npm ci
       - run: npm run make
-      - uses: actions/upload-artifact@v4
+      - uses: softprops/action-gh-release@v2
         with:
-          name: Kommita-${{ github.ref_name }}-linux-${{ github.sha }}
-          path: out
+          files: |
+            out/**/*.deb
+            out/**/*.rpm
+          tag_name: ${{ github.ref_name }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.PA_TOKEN }}
 
   build-macos:
     runs-on: macos-latest
@@ -31,10 +31,13 @@ jobs:
           node-version: '22'
       - run: npm ci
       - run: npm run make
-      - uses: actions/upload-artifact@v4
+      - uses: softprops/action-gh-release@v2
         with:
-          name: Kommita-${{ github.ref_name }}-macos-${{ github.sha }}
-          path: out
+          files: |
+            out/**/*.zip
+          tag_name: ${{ github.ref_name }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.PA_TOKEN }}
 
   build-windows:
     runs-on: windows-latest
@@ -45,22 +48,10 @@ jobs:
           node-version: '22'
       - run: npm ci
       - run: npm run make
-      - uses: actions/upload-artifact@v4
-        with:
-          name: Kommita-${{ github.ref_name }}-windows-${{ github.sha }}
-          path: out
-
-  release:
-    runs-on: ubuntu-latest
-    needs: [ build-linux, build-macos, build-windows ]
-    steps:
-      - uses: actions/download-artifact@v4
-        with:
-          path: out/
-          merge-multiple: true
       - uses: softprops/action-gh-release@v2
         with:
-          files: out/**/*
+          files: |
+            out/**/*kommita*Setup*.exe
           tag_name: ${{ github.ref_name }}
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PA_TOKEN }}
