@@ -24,7 +24,7 @@ jobs:
           files: |
             out/**/*.deb
             out/**/*.rpm
-          tag_name: 0.2
+          tag_name: ${{ github.ref_name }}
         env:
           GITHUB_TOKEN: ${{ secrets.PA_TOKEN }}
 
@@ -41,7 +41,7 @@ jobs:
         with:
           files: |
             out/**/*.zip
-          tag_name: 0.2
+          tag_name: ${{ github.ref_name }}
         env:
           GITHUB_TOKEN: ${{ secrets.PA_TOKEN }}
 
@@ -58,6 +58,6 @@ jobs:
         with:
           files: |
             out/**/*kommita*Setup*.exe
-          tag_name: 0.2
+          tag_name: ${{ github.ref_name }}
         env:
           GITHUB_TOKEN: ${{ secrets.PA_TOKEN }}
