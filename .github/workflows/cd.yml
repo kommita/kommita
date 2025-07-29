@@ -40,6 +40,8 @@ jobs:
           files: |
             out/**/*.zip
           tag_name: 0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.PA_TOKEN }}
 
   build-windows:
     runs-on: windows-latest
