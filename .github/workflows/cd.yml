@@ -24,6 +24,7 @@ jobs:
           path: |
             out/**/*.deb
             out/**/*.rpm
+          name: Kommita-${{ github.ref_name }}-linux-${{ github.sha }}
 
   build-macos:
     runs-on: macos-latest
@@ -38,6 +39,7 @@ jobs:
         with:
           path: |
             out/**/*.zip
+          name: Kommita-${{ github.ref_name }}-macos-${{ github.sha }}
   #
   #  build-windows:
   #    runs-on: windows-latest
