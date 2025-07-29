@@ -11,6 +11,10 @@ jobs:
           node-version: '22'
       - run: npm ci
       - run: npm run make
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${event.repository.name}-${{ github.sha }}
+          path: /out
 
 #jobs:
 #  build:
