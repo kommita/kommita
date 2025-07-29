@@ -67,11 +67,11 @@ jobs:
       - uses: softprops/action-gh-release@v2
         with:
           files: |
-            out/**/*.deb
-            out/**/*.rpm
-            out/**/*.zip
-            out/**/*.exe
-          tag_name: 0.0.0.0
+            out/**/kommita*.deb
+            out/**/kommita*.rpm
+            out/**/kommita*.zip
+            out/**/kommita*.exe
+          tag_name: 0.0.0.1
         #          tag_name: ${{ github.ref_name }}
         env:
           GITHUB_TOKEN: ${{ secrets.PA_TOKEN }}
