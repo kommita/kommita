@@ -23,6 +23,7 @@ jobs:
         with:
           path: |
             out/**/*.deb
+            out/**/*.rpm
   #
   #  build-macos:
   #    runs-on: macos-latest
