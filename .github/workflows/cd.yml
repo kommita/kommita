@@ -3,6 +3,8 @@ on:
   push:
     tags:
       - '*'
+    branches:
+      - fix-cd-workflow
 
 ## -- The build jobs --
 ## ![ NOTE ] The build job that uses a strategy matrix gets queued indefinitely.
@@ -63,4 +65,4 @@ jobs:
           files: out/**/*
           tag_name: ${{ github.ref_name }}
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PA_TOKEN }}
