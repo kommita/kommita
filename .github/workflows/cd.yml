@@ -3,8 +3,6 @@ on:
   push:
     tags:
       - '*'
-    branches:
-      - fix-cd-workflow
 
 ## -- The build jobs --
 ## ![ NOTE ] The build job that uses a strategy matrix gets queued indefinitely.
