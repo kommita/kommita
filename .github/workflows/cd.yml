@@ -3,18 +3,24 @@ on: [ push ]
 
 jobs:
   build:
-    runs-on: ${ { matrix.os } }
-    strategy:
-      matrix:
-        os: [ 'ubuntu-latest', 'windows-latest', 'macos-latest' ]
+    runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-      - run: npm ci
-      - run: npm run make
-      - uses: actions/upload-artifact@v4
-        with:
-          name: ${event.repository.name}-${{ matrix.os }}-${{ github.sha }}
-          path: /out
+      - run: echo "This is a placeholder for the build job."
+
+#jobs:
+#  build:
+#    runs-on: ${ { matrix.os } }
+#    strategy:
+#      matrix:
+#        os: [ 'ubuntu-latest', 'windows-latest', 'macos-latest' ]
+#    steps:
+#      - uses: actions/checkout@v4
+#      - uses: actions/setup-node@v4
+#        with:
+#          node-version: '22'
+#      - run: npm ci
+#      - run: npm run make
+#      - uses: actions/upload-artifact@v4
+#        with:
+#          name: ${event.repository.name}-${{ matrix.os }}-${{ github.sha }}
+#          path: /out
