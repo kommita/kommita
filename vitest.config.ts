@@ -1,6 +1,5 @@
 // eslint-disable-next-line import/no-unresolved
 import { defineConfig } from 'vitest/config';
-import viteReact from '@vitejs/plugin-react';
 
 export default defineConfig({
     test: {
@@ -8,6 +7,7 @@ export default defineConfig({
             {
                 extends: true,
                 test: {
+                    typecheck: { enabled: true },
                     name: { label: 'core', color: 'blue' },
                     environment: 'node',
                     include: [
@@ -17,8 +17,8 @@ export default defineConfig({
             },
             {
                 extends: true,
-                plugins: [viteReact()],
                 test: {
+                    typecheck: { enabled: true },
                     name: { label: 'ui', color: 'yellow' },
                     environment: 'jsdom',
                     include: [
@@ -28,14 +28,8 @@ export default defineConfig({
             },
         ],
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-expect-error
+        //@ts-ignore
         coverage: {
-            thresholds: {
-                // statements: 100,
-                // functions: 100,
-                // branches: 100,
-                // lines: 100,
-            },
             include: [
                 'src/core/**/*.ts',
                 'src/ui/**/*.ts',
