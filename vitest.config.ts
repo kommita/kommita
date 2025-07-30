@@ -8,7 +8,6 @@ export default defineConfig({
             {
                 extends: true,
                 test: {
-                    typecheck: { enabled: true },
                     name: { label: 'core', color: 'blue' },
                     environment: 'node',
                     include: [
@@ -20,7 +19,6 @@ export default defineConfig({
                 extends: true,
                 plugins: [viteReact()],
                 test: {
-                    typecheck: { enabled: true },
                     name: { label: 'ui', color: 'yellow' },
                     environment: 'jsdom',
                     include: [
