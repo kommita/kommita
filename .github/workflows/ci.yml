@@ -13,11 +13,33 @@ jobs:
       - run: npm run lint
       - run: npm run test
 
-  build:
-    runs-on: ${ matrix.os }
-    strategy:
-      matrix:
-        os: [ ubuntu-latest, macos-latest, windows-latest ]
+    ## ----------------------------------------------------------------------------------------------
+    # Using the strategy to run the same job on multiple platforms makes the workflow queued forever
+    # We can replace the following repetitive jobs with a single job using a strategy matrix
+    # if the issue is resolved in the future.
+    ## ----------------------------------------------------------------------------------------------
+  build-linux:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm ci
+      - run: npm run make
+
+  build-macos:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm ci
+      - run: npm run make
+
+  build-windows:
+    runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
