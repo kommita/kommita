@@ -30,6 +30,12 @@ export default defineConfig({
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         //@ts-ignore
         coverage: {
+            thresholds: {
+                // statements: 100,
+                // functions: 100,
+                // branches: 100,
+                // lines: 100,
+            },
             include: [
                 'src/core/**/*.ts',
                 'src/ui/**/*.ts',
