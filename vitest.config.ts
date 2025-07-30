@@ -1,6 +1,6 @@
 // eslint-disable-next-line import/no-unresolved
 import { defineConfig } from 'vitest/config';
-import react from '@vitejs/plugin-react-swc';
+import viteReact from '@vitejs/plugin-react';
 
 export default defineConfig({
     test: {
@@ -18,7 +18,7 @@ export default defineConfig({
             },
             {
                 extends: true,
-                plugins: [react()],
+                plugins: [viteReact()],
                 test: {
                     typecheck: { enabled: true },
                     name: { label: 'ui', color: 'yellow' },
