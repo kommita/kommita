@@ -2,7 +2,7 @@
   "name": "kommita",
   "type": "module",
   "productName": "kommita",
-  "version": "25.1.x",
+  "version": "25.1.0",
   "description": "The top-notch Git client for Windows, macOS, and Linux",
   "main": ".vite/build/main.js",
   "scripts": {
