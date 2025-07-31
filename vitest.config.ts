@@ -19,11 +19,13 @@ export default defineConfig({
                 extends: true,
                 plugins: [viteReact()],
                 test: {
+                    globals: true, // needed for auto-cleanup (React Testing Library)
                     name: { label: 'ui', color: 'yellow' },
                     environment: 'jsdom',
                     include: [
                         'src/ui/**/*.test.{ts,tsx}',
                     ],
+                    setupFiles: ['vitest.setup.ui.ts'],
                 },
             },
         ],
