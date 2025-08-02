@@ -93,3 +93,6 @@ out/
 
 # IDEs
 .idea/
+
+*storybook.log
+storybook-static
