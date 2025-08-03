@@ -1,6 +1,5 @@
 import { AppWindow } from '../../Application/CreateAppWindow';
 import { OpenDevToolsHandler, OpenHandler, WindowMaker, WindowOptions } from './types';
-import { partial } from 'ramda';
 
 export function createElectronWindow(
     makeWindow: WindowMaker,
@@ -15,7 +14,7 @@ export function createElectronWindow(
     });
 
     return {
-        open: partial(openHandler, [window, options]),
-        openDevTools: partial(openDevToolsHandler, [window]),
-    } as AppWindow;
+        open: () => openHandler(window, options),
+        openDevTools: () => openDevToolsHandler(window, options),
+    };
 }
