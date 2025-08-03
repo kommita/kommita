@@ -8,8 +8,8 @@ import { openDevTools } from '../config/AppConfig';
 
 handleStartup(shouldQuit, app);
 
-const onAppReady = partial(createWindow, [windowFactory, { openDevTools }]);
+const createAppWindow = partial(createWindow, [windowFactory, { openDevTools }]);
 
-app.on('ready', onAppReady);
+app.on('ready', createAppWindow);
 app.on('window-all-closed', quit);
 app.on('activate', reCreateWindow);
