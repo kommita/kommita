@@ -1,5 +1,5 @@
 import { createWindow, quit, reCreateWindow } from './core/MainWindow';
-import { handleStartup } from './core/Application/StartupHandler/HandleStartup';
+import { handleStartup } from './core/Application/Startup';
 import { app, shouldQuit } from './core/Framework/App';
 
 handleStartup(shouldQuit, app);
