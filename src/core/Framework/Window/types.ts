@@ -1,11 +1,14 @@
 import { BrowserWindow } from 'electron';
 
-export interface WindowOptions {
+export interface CreateWindowOptions {
     width: number;
     height: number;
     webPreferences: {
         preload: string;
     };
+}
+
+export interface WindowOptions extends CreateWindowOptions {
     isDev: boolean;
     openDevTools: boolean;
     devServerUrl: string;
@@ -13,7 +16,7 @@ export interface WindowOptions {
 }
 
 export interface WindowMaker {
-    (options: Omit<WindowOptions, 'isDev' | 'devServerUrl' | 'mainWindowURL' | 'openDevTools'>): BrowserWindow;
+    (options: CreateWindowOptions): BrowserWindow;
 }
 
 export interface OpenHandler {
