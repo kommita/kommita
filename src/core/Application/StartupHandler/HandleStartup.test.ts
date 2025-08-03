@@ -1,9 +1,9 @@
 import { describe, expect, test, vi } from 'vitest';
-import { App } from '../../types';
+import { App } from '../types';
 import { handleStartup } from './HandleStartup';
 
 describe('Handler Startup', () => {
-    test('it should quit the app if started', () => {
+    test('it should quit the app if required', () => {
         const app: App = { quit: vi.fn() } as App;
 
         handleStartup(true, app);
@@ -11,7 +11,7 @@ describe('Handler Startup', () => {
         expect(app.quit).toHaveBeenCalled();
     });
 
-    test('it should skip quitting the app if not started', () => {
+    test('it should skip quitting the app if not required', () => {
         const app: App = { quit: vi.fn() } as App;
 
         handleStartup(false, app);

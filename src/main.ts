@@ -1,8 +1,8 @@
-import { app } from 'electron';
 import { createWindow, quit, reCreateWindow } from './core/MainWindow';
-import { handleWindowsShortcuts } from './core/windows/ShortcutHandler';
+import { handleStartup } from './core/Application/StartupHandler/HandleStartup';
+import { app, shouldQuit } from './core/Framework/App';
 
-handleWindowsShortcuts();
+handleStartup(shouldQuit, app);
 
 app.on('ready', createWindow);
 app.on('window-all-closed', quit);
