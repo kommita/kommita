@@ -14,8 +14,8 @@ export function createElectronWindow(
         webPreferences: options.webPreferences,
     });
 
-    return <AppWindow>{
+    return {
         open: partial(openHandler, [window, options]),
         openDevTools: partial(openDevToolsHandler, [window]),
-    };
+    } as AppWindow;
 }
