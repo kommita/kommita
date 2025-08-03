@@ -1,25 +1,20 @@
 import { app, BrowserWindow } from 'electron';
 import path from 'node:path';
-import { appConfig, filesystemConfig } from '../../config';
+import { appEnv, mainWindowConfig } from '../../config/AppConfig';
+import { rootDir } from '../../config/FileSystem';
 
 export async function createWindow() {
-    const mainWindow = new BrowserWindow({
-        height: 600,
-        width: 800,
-        webPreferences: {
-            preload: path.join(filesystemConfig.rootDir, 'preload.js'),
-        },
-    });
+    const mainWindow = new BrowserWindow(mainWindowConfig);
 
     // and load the index.html of the app.
     if (MAIN_WINDOW_VITE_DEV_SERVER_URL) {
         await mainWindow.loadURL(MAIN_WINDOW_VITE_DEV_SERVER_URL);
     } else {
-        await mainWindow.loadFile(path.join(filesystemConfig.rootDir, `../renderer/${MAIN_WINDOW_VITE_NAME}/index.html`));
+        await mainWindow.loadFile(path.join(rootDir, `../renderer/${MAIN_WINDOW_VITE_NAME}/index.html`));
     }
 
     // Open the DevTools if in development mode
-    if (appConfig.env === 'development') mainWindow.webContents.openDevTools();
+    if (appEnv === 'development') mainWindow.webContents.openDevTools();
 }
 
 export function quit() {
