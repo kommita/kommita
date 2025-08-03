@@ -3,7 +3,7 @@ import { defineConfig } from 'vitest/config';
 import viteReact from '@vitejs/plugin-react';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-// @ts-ignore the storybookTest member is exported by the vitest plugin
+// @ts-expect-error the storybookTest member is exported by the vitest plugin
 import { storybookTest } from '@storybook/addon-vitest/vitest-plugin';
 
 const dirname = typeof __dirname !== 'undefined' ? __dirname : path.dirname(fileURLToPath(import.meta.url));
