@@ -1,5 +1,5 @@
 import { describe, expect, test, vi } from 'vitest';
-import { AppWindow } from '../../Application/OpenMainWindow';
+import { AppWindow } from '../../Application/CreateAppWindow';
 import { createElectronWindow } from './WindowFactory';
 import { OpenDevToolsHandler, OpenHandler, WindowMaker } from './types';
 

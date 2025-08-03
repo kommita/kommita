@@ -6,7 +6,7 @@ import { BrowserWindow } from 'electron';
 import { partial } from 'ramda';
 import { createElectronWindow } from './WindowFactory';
 import { openDevToolsHandler, openHandler } from './WindowHelper';
-import { WindowFactory } from '../../Application/OpenMainWindow';
+import { WindowFactory } from '../../Application/CreateAppWindow';
 
 const defaultWindowOptions: WindowOptions = {
     ...mainWindowConfig,

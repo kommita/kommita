@@ -2,7 +2,7 @@ import { quit, reCreateWindow } from './core/MainWindow';
 import { handleStartup } from './core/Application/Startup';
 import { app, shouldQuit } from './core/Framework/App';
 import { partial } from 'ramda';
-import { createWindow } from './core/Application/OpenMainWindow';
+import { createWindow } from './core/Application/CreateAppWindow';
 import { windowFactory } from './core/Framework/Window';
 import { openDevTools } from '../config/AppConfig';
 

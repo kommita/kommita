@@ -1,4 +1,4 @@
-import { AppWindow } from '../../Application/OpenMainWindow';
+import { AppWindow } from '../../Application/CreateAppWindow';
 import { OpenDevToolsHandler, OpenHandler, WindowMaker, WindowOptions } from './types';
 import { partial } from 'ramda';
 
