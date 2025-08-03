@@ -1,9 +1,15 @@
-import { app } from 'electron';
-import { createWindow, quit, reCreateWindow } from './core/MainWindow';
-import { handleWindowsShortcuts } from './core/windows/ShortcutHandler';
+import { quit, reCreateWindow } from './core/MainWindow';
+import { handleStartup } from './core/Application/Startup';
+import { app, shouldQuit } from './core/Framework/App';
+import { partial } from 'ramda';
+import { createWindow } from './core/Application/CreateAppWindow';
+import { windowFactory } from './core/Framework/Window';
+import { openDevTools } from '../config/AppConfig';
 
-handleWindowsShortcuts();
+handleStartup(shouldQuit, app);
 
-app.on('ready', createWindow);
+const createAppWindow = partial(createWindow, [windowFactory, { openDevTools }]);
+
+app.on('ready', createAppWindow);
 app.on('window-all-closed', quit);
 app.on('activate', reCreateWindow);
