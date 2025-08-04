@@ -9,16 +9,15 @@ import { BrowserWindow } from 'electron';
 
 handleStartup(shouldQuit, app);
 
-const platform: Platform = process.platform as Platform;
-
 const windowOptions: WindowOptions = {
     openDevTools: appEnv !== 'production',
 };
-
 const createAppWindow = partial(createWindow, [windowFactory]);
-const quitApp = partial(quit, [app]);
-const activateAppWindow = partial(reCreateMainWindow, [createAppWindow, windowOptions]);
-
 app.on('ready', () => createAppWindow(windowOptions));
+
+const platform: Platform = process.platform as Platform;
+const quitApp = partial(quit, [app]);
 app.on('window-all-closed', () => quitApp(platform));
+
+const activateAppWindow = partial(reCreateMainWindow, [createAppWindow, windowOptions]);
 app.on('activate', () => activateAppWindow(BrowserWindow.getAllWindows().length));
