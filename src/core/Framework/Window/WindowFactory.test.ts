@@ -24,6 +24,9 @@ describe('Window factory', () => {
             height: windowOptions.height,
             webPreferences: windowOptions.webPreferences,
         });
-        expect(window.openDevTools).toBeDefined();
+        window.openDevTools();
+        window.open();
+        expect(openHandler).toHaveBeenCalled();
+        expect(openDevToolsHandler).toHaveBeenCalled();
     });
 });
