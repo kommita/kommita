@@ -1,6 +1,6 @@
 import { handleStartup } from './core/Application/Startup';
 import { app, shouldQuit } from './core/Framework/App';
-import { createWindow, quit, reCreateMainWindow } from './core/Application/MainWindow';
+import { createWindow, quit, reCreateMainWindow, WindowOptions } from './core/Application/MainWindow';
 import { windowFactory } from './core/Framework/Window';
 import { partial } from 'ramda';
 import { appEnv } from '../config/AppConfig';
@@ -9,13 +9,15 @@ import { BrowserWindow } from 'electron';
 
 handleStartup(shouldQuit, app);
 
+const windowOptions: WindowOptions = {
+    openDevTools: appEnv !== 'production',
+};
 const createAppWindow = partial(createWindow, [windowFactory]);
+app.on('ready', () => createAppWindow(windowOptions));
 
-const quitApp = partial(quit, [app]);
 const platform: Platform = process.platform as Platform;
-
-const activateAppWindow = partial(reCreateMainWindow, [createAppWindow, { openDevTools: appEnv !== 'production' }]);
-
-app.on('ready', () => createAppWindow({ openDevTools: appEnv !== 'production' }));
+const quitApp = partial(quit, [app]);
 app.on('window-all-closed', () => quitApp(platform));
+
+const activateAppWindow = partial(reCreateMainWindow, [createAppWindow, windowOptions]);
 app.on('activate', () => activateAppWindow(BrowserWindow.getAllWindows().length));
