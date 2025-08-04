@@ -5,7 +5,7 @@ describe('Activate application window', () => {
     test('it should recreate the main window if all windows are closed', () => {
         const createAppWindow = vi.fn();
 
-        reCreateMainWindow(createAppWindow, 0);
+        reCreateMainWindow(createAppWindow, { openDevTools: false }, 0);
 
         expect(createAppWindow).toHaveBeenCalledTimes(1);
     });
@@ -13,7 +13,7 @@ describe('Activate application window', () => {
     test('it should not recreate the main window if there are open windows', () => {
         const createAppWindow = vi.fn();
 
-        reCreateMainWindow(createAppWindow, 1);
+        reCreateMainWindow(createAppWindow, { openDevTools: false }, 1);
 
         expect(createAppWindow).not.toHaveBeenCalled();
     });

@@ -14,7 +14,7 @@ const createAppWindow = partial(createWindow, [windowFactory]);
 const quitApp = partial(quit, [app]);
 const platform: Platform = process.platform as Platform;
 
-const activateAppWindow = partial(reCreateMainWindow, [createAppWindow]);
+const activateAppWindow = partial(reCreateMainWindow, [createAppWindow, { openDevTools: appEnv !== 'production' }]);
 
 app.on('ready', () => createAppWindow({ openDevTools: appEnv !== 'production' }));
 app.on('window-all-closed', () => quitApp(platform));
