@@ -1,6 +1,6 @@
 import { describe, expect, test, vi } from 'vitest';
 import { App } from '../types';
-import { quit } from './quit';
+import { quit } from './Quit';
 
 describe('App quit', () => {
     test('it should quit the app on non-darwin platforms', () => {
