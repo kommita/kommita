@@ -1,15 +1,9 @@
-import { BrowserWindow } from 'electron';
+import { BrowserWindow, BrowserWindowConstructorOptions } from 'electron';
 
-export interface CreateWindowOptions {
-    width: number;
-    height: number;
-    webPreferences: {
-        preload: string;
-    };
-}
+export type CreateWindowOptions = BrowserWindowConstructorOptions
 
 export interface WindowOptions {
-    createOptions: CreateWindowOptions;
+    windowConstructorOptions: CreateWindowOptions;
     isDev: boolean;
     openDevTools: boolean;
     devServerUrl: string;

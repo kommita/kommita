@@ -9,7 +9,7 @@ import { openDevToolsHandler, openHandler } from './WindowHelper';
 import { WindowFactory } from '../../Application/MainWindow';
 
 const defaultWindowOptions: WindowOptions = {
-    createOptions: {
+    windowConstructorOptions: {
         width: 600,
         height: 400,
         webPreferences: {
