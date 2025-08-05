@@ -10,7 +10,7 @@ import { windowFactory } from './core/Framework/Window';
 handleStartup(shouldQuit, app);
 
 const windowOptions: WindowOptions = {
-    openDevTools: appEnv !== 'production',
+  openDevTools: appEnv !== 'production',
 };
 
 const initAppHandler = partial(initApp, [windowFactory, windowOptions]);

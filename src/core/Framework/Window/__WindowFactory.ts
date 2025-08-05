@@ -8,8 +8,8 @@ import { defaultWindowOptions } from './__DefaultWindowOptions';
 
 const windowMaker: WindowMaker = (options: CreateWindowOptions) => new BrowserWindow(options);
 export const windowFactory: WindowFactory = partial(createElectronWindow, [
-    windowMaker,
-    openHandler,
-    openDevToolsHandler,
-    defaultWindowOptions,
+  windowMaker,
+  openHandler,
+  openDevToolsHandler,
+  defaultWindowOptions,
 ]);
