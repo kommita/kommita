@@ -12,5 +12,7 @@ export function createElectronWindow(
   return {
     open: () => openHandler(window, options),
     openDevTools: () => openDevToolsHandler(window, options),
+    show: () => window.show(),
+    close: () => window.close(),
   };
 }

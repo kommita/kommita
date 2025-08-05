@@ -4,7 +4,11 @@ import { createElectronWindow } from './ElectronWindow';
 import { OpenDevToolsHandler, OpenHandler, WindowMaker, WindowOptions } from './types';
 
 test('create electron window', () => {
-  const maker = vi.fn() as WindowMaker;
+  const windowMock = {
+    show: vi.fn(),
+    close: vi.fn(),
+  };
+  const maker = vi.fn().mockReturnValue(windowMock) as WindowMaker;
   const openHandler = vi.fn() as OpenHandler;
   const openDevToolsHandler = vi.fn() as OpenDevToolsHandler;
   const windowOptions: WindowOptions = {
@@ -14,15 +18,19 @@ test('create electron window', () => {
       webPreferences: { preload: 'path/to/preload.js' },
     },
     isDev: true,
-    openDevTools: true,
     devServerUrl: 'http://localhost:3000',
     mainWindowURL: 'path/to/main.html'
   };
   const window: AppWindow = createElectronWindow(maker, openHandler, openDevToolsHandler, windowOptions);
 
   expect(maker).toHaveBeenCalledWith(windowOptions.windowConstructorOptions);
+  // For coverage purposes
   window.openDevTools();
   window.open();
+  window.show();
+  window.close();
   expect(openHandler).toHaveBeenCalled();
   expect(openDevToolsHandler).toHaveBeenCalled();
+  expect(windowMock.show).toHaveBeenCalled();
+  expect(windowMock.close).toHaveBeenCalled();
 });

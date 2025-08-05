@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <title>Title</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #FF5A1F;
+        }
+
+        img {
+            width: 150px;
+            height: auto;
+            animation: shakeY 1.2s cubic-bezier(.36, .07, .19, .97) infinite;
+        }
+
+        @keyframes shakeY {
+            0% {
+                transform: translateY(0);
+            }
+            10% {
+                transform: translateY(-2px);
+            }
+            20% {
+                transform: translateY(2px);
+            }
+            30% {
+                transform: translateY(-4px);
+            }
+            40% {
+                transform: translateY(4px);
+            }
+            50% {
+                transform: translateY(-4px);
+            }
+            60% {
+                transform: translateY(4px);
+            }
+            70% {
+                transform: translateY(-2px);
+            }
+            80% {
+                transform: translateY(2px);
+            }
+            90% {
+                transform: translateY(-1px);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+<h1>
+    <img src='./assets/logo.svg' alt='Kommita'>
+</h1>
+</body>
+</html>

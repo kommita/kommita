@@ -5,7 +5,7 @@ import { partial } from 'ramda';
 import { appEnv } from '../config/AppConfig';
 import { Platform } from './core/Application';
 import { BrowserWindow } from 'electron';
-import { windowFactory } from './core/Framework/Window';
+import { createMainWindow, createSplashScreen } from './core/Framework/Window';
 
 handleStartup(shouldQuit, app);
 
@@ -13,7 +13,7 @@ const windowOptions: WindowOptions = {
   openDevTools: appEnv !== 'production',
 };
 
-const initAppHandler = partial(initApp, [windowFactory, windowOptions]);
+const initAppHandler = partial(initApp, [createMainWindow, createSplashScreen, windowOptions]);
 app.on('ready', initAppHandler);
 
 const platform: Platform = process.platform as Platform;
