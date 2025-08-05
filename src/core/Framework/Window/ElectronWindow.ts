@@ -7,13 +7,10 @@ export function createElectronWindow(
     openDevToolsHandler: OpenDevToolsHandler,
     options: WindowOptions
 ): AppWindow {
-    const window = makeWindow({
-        width: options.width,
-        height: options.height,
-        webPreferences: options.webPreferences,
-    });
+    const window = makeWindow(options.windowConstructorOptions);
 
     return {
+        ...window,
         open: () => openHandler(window, options),
         openDevTools: () => openDevToolsHandler(window, options),
     };

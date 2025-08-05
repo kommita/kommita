@@ -1,23 +1,24 @@
 import { handleStartup } from './core/Application/Startup';
 import { app, shouldQuit } from './core/Framework/App';
-import { createWindow, quit, reCreateMainWindow, WindowOptions } from './core/Application/MainWindow';
-import { windowFactory } from './core/Framework/Window';
+import { initApp, quitApp, reCreateMainWindow, WindowOptions } from './core/Application/MainWindow';
 import { partial } from 'ramda';
 import { appEnv } from '../config/AppConfig';
 import { Platform } from './core/Application';
 import { BrowserWindow } from 'electron';
+import { windowFactory } from './core/Framework/Window';
 
 handleStartup(shouldQuit, app);
 
 const windowOptions: WindowOptions = {
     openDevTools: appEnv !== 'production',
 };
-const createAppWindow = partial(createWindow, [windowFactory]);
-app.on('ready', () => createAppWindow(windowOptions));
+
+const initAppHandler = partial(initApp, [windowFactory, windowOptions]);
+app.on('ready', initAppHandler);
 
 const platform: Platform = process.platform as Platform;
-const quitApp = partial(quit, [app]);
-app.on('window-all-closed', () => quitApp(platform));
+const quitAppHandler = partial(quitApp, [app, platform]);
+app.on('window-all-closed', quitAppHandler);
 
-const activateAppWindow = partial(reCreateMainWindow, [createAppWindow, windowOptions]);
-app.on('activate', () => activateAppWindow(BrowserWindow.getAllWindows().length));
+const activateAppHandler = partial(reCreateMainWindow, [initAppHandler]);
+app.on('activate', () => activateAppHandler(BrowserWindow.getAllWindows().length));

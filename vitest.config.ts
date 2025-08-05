@@ -29,7 +29,7 @@ export default defineConfig({
                 // needed for auto-cleanup (React Testing Library)
                 name: {
                     label: 'ui',
-                    color: 'yellow'
+                    color: 'green'
                 },
                 environment: 'jsdom',
                 include: ['src/ui/**/*.test.{ts,tsx}'],
@@ -77,6 +77,7 @@ export default defineConfig({
                 '**/config/**',
                 '**/tests/**',
                 '**/types.ts',
+                '**/__*.ts',
             ],
         },
     }
