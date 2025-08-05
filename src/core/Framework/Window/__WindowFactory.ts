@@ -7,7 +7,7 @@ import { openDevToolsHandler, openHandler } from './WindowHelper';
 import { defaultWindowOptions } from './__DefaultWindowOptions';
 
 const windowMaker: WindowMaker = (options: CreateWindowOptions) => new BrowserWindow(options);
-export const mainWindowFactory: MainWindowFactory = partial(createElectronWindow, [
+export const createMainWindow: MainWindowFactory = partial(createElectronWindow, [
   windowMaker,
   openHandler,
   openDevToolsHandler,
