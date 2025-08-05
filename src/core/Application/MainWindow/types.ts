@@ -4,6 +4,10 @@ export interface MainWindow {
   show: () => void;
 }
 
+export interface SplashScreen {
+  close: () => void;
+}
+
 export interface WindowOptions {
   openDevTools: boolean;
 }
