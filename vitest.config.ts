@@ -77,6 +77,7 @@ export default defineConfig({
                 '**/config/**',
                 '**/tests/**',
                 '**/types.ts',
+                '**/__**.ts',
             ],
         },
     }

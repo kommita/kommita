@@ -1,15 +1,15 @@
 import { describe, expect, test, vi } from 'vitest';
 import { AppWindow } from '../../Application/MainWindow';
 import { createElectronWindow } from './WindowFactory';
-import { OpenDevToolsHandler, OpenHandler, WindowMaker } from './types';
+import { OpenDevToolsHandler, OpenHandler, WindowMaker, WindowOptions } from './types';
 
 describe('Window factory', () => {
     test('create window', () => {
         const maker = vi.fn() as WindowMaker;
         const openHandler = vi.fn() as OpenHandler;
         const openDevToolsHandler = vi.fn() as OpenDevToolsHandler;
-        const windowOptions = {
-            createOptions: {
+        const windowOptions: WindowOptions = {
+            windowConstructorOptions: {
                 width: 800,
                 height: 600,
                 webPreferences: { preload: 'path/to/preload.js' },
@@ -21,7 +21,7 @@ describe('Window factory', () => {
         };
         const window: AppWindow = createElectronWindow(maker, openHandler, openDevToolsHandler, windowOptions);
 
-        expect(maker).toHaveBeenCalledWith(windowOptions.createOptions);
+        expect(maker).toHaveBeenCalledWith(windowOptions.windowConstructorOptions);
         window.openDevTools();
         window.open();
         expect(openHandler).toHaveBeenCalled();

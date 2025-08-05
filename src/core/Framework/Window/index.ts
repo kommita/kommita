@@ -4,7 +4,7 @@ import { partial } from 'ramda';
 import { createElectronWindow } from './WindowFactory';
 import { openDevToolsHandler, openHandler } from './WindowHelper';
 import { WindowFactory } from '../../Application/MainWindow';
-import { defaultWindowOptions } from './DefaultWindowOptions';
+import { defaultWindowOptions } from './__DefaultWindowOptions';
 
 const windowMaker: WindowMaker = (options: CreateWindowOptions) => new BrowserWindow(options);
 
