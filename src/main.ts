@@ -1,11 +1,11 @@
 import { handleStartup } from './core/Application/Startup';
 import { app, shouldQuit } from './core/Framework/App';
 import { initApp, quitApp, reCreateMainWindow, WindowOptions } from './core/Application/MainWindow';
-import { windowFactory } from './core/Framework/Window';
 import { partial } from 'ramda';
 import { appEnv } from '../config/AppConfig';
 import { Platform } from './core/Application';
 import { BrowserWindow } from 'electron';
+import { windowFactory } from './core/Framework/Window';
 
 handleStartup(shouldQuit, app);
 
