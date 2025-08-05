@@ -1,6 +1,6 @@
-import { AppWindow, MainWindowFactory, WindowOptions } from './types';
+import { AppWindow, WindowFactory, WindowOptions } from './types';
 
-export async function initApp(createMainWindow: MainWindowFactory, options: WindowOptions): Promise<void> {
+export async function initApp(createMainWindow: WindowFactory, options: WindowOptions): Promise<void> {
   const window: AppWindow = createMainWindow();
 
   await window.open();

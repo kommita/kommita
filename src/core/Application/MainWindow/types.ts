@@ -9,6 +9,6 @@ export interface WindowOptions {
   openDevTools: boolean;
 }
 
-export interface MainWindowFactory {
+export interface WindowFactory {
   (): AppWindow;
 }
