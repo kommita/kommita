@@ -3,19 +3,19 @@ import { App } from '../types';
 import { handleStartup } from './HandleStartup';
 
 describe('Handler Startup', () => {
-    test('it should quit the app if required', () => {
-        const app: App = { quit: vi.fn() } as App;
+  test('it should quit the app if required', () => {
+    const app: App = { quit: vi.fn() } as App;
 
-        handleStartup(true, app);
+    handleStartup(true, app);
 
-        expect(app.quit).toHaveBeenCalled();
-    });
+    expect(app.quit).toHaveBeenCalled();
+  });
 
-    test('it should skip quitting the app if not required', () => {
-        const app: App = { quit: vi.fn() } as App;
+  test('it should skip quitting the app if not required', () => {
+    const app: App = { quit: vi.fn() } as App;
 
-        handleStartup(false, app);
+    handleStartup(false, app);
 
-        expect(app.quit).not.toHaveBeenCalled();
-    });
+    expect(app.quit).not.toHaveBeenCalled();
+  });
 });
