@@ -1,10 +1,7 @@
-export interface MainWindow {
+export interface AppWindow {
   open: () => Promise<void>;
   openDevTools: () => void;
   show: () => void;
-}
-
-export interface SplashScreen {
   close: () => void;
 }
 
@@ -13,5 +10,5 @@ export interface WindowOptions {
 }
 
 export interface MainWindowFactory {
-  (): MainWindow;
+  (): AppWindow;
 }

@@ -1,6 +1,6 @@
 import { expect, test, vi } from 'vitest';
-import { MainWindow } from '../../Application/MainWindow';
-import { createMainWindow } from './ElectronWindow';
+import { AppWindow } from '../../Application/MainWindow';
+import { createElectronWindow } from './ElectronWindow';
 import { OpenDevToolsHandler, OpenHandler, WindowMaker, WindowOptions } from './types';
 
 test('create electron window', () => {
@@ -21,7 +21,7 @@ test('create electron window', () => {
     devServerUrl: 'http://localhost:3000',
     mainWindowURL: 'path/to/main.html'
   };
-  const window: MainWindow = createMainWindow(maker, openHandler, openDevToolsHandler, windowOptions);
+  const window: AppWindow = createElectronWindow(maker, openHandler, openDevToolsHandler, windowOptions);
 
   expect(maker).toHaveBeenCalledWith(windowOptions.windowConstructorOptions);
   // For coverage purposes

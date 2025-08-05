@@ -1,13 +1,13 @@
 import { describe, expect, test, vi } from 'vitest';
-import { MainWindow, MainWindowFactory } from './types';
+import { AppWindow, MainWindowFactory } from './types';
 import { initApp } from './InitApp';
 
 describe('App Init', () => {
-  const window: MainWindow = {
+  const window: AppWindow = {
     open: vi.fn(),
     openDevTools: vi.fn(),
     show: vi.fn(),
-  } as unknown as MainWindow;
+  } as unknown as AppWindow;
 
   test('it should handle main window & splash screen', async () => {
     const createMainWindow: MainWindowFactory = vi.fn().mockReturnValue(window);
