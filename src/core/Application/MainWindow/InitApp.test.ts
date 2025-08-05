@@ -1,15 +1,15 @@
 import { describe, expect, test, vi } from 'vitest';
-import { AppWindow, WindowFactory } from './types';
+import { MainWindow, MainWindowFactory } from './types';
 import { initApp } from './InitApp';
 
 describe('App Init', () => {
-  const window: AppWindow = {
+  const window: MainWindow = {
     open: vi.fn(),
     openDevTools: vi.fn(),
-  } as unknown as AppWindow;
+  } as unknown as MainWindow;
 
   test('it should create & open main window', async () => {
-    const factory: WindowFactory = vi.fn().mockReturnValue(window);
+    const factory: MainWindowFactory = vi.fn().mockReturnValue(window);
 
     await initApp(factory, { openDevTools: false });
 
@@ -19,7 +19,7 @@ describe('App Init', () => {
   });
 
   test('it should open dev tools if configured', async () => {
-    const factory: WindowFactory = vi.fn().mockReturnValue(window);
+    const factory: MainWindowFactory = vi.fn().mockReturnValue(window);
 
     await initApp(factory, { openDevTools: true });
 
