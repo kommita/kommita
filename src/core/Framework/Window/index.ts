@@ -1,5 +1,5 @@
 import { WindowMaker, WindowOptions } from './types';
-import { appEnv, mainWindowConfig } from '../../../../config/AppConfig';
+import { appEnv } from '../../../../config/AppConfig';
 import path from 'node:path';
 import { rootDir } from '../../../../config/FileSystem';
 import { BrowserWindow } from 'electron';
@@ -7,6 +7,14 @@ import { partial } from 'ramda';
 import { createElectronWindow } from './WindowFactory';
 import { openDevToolsHandler, openHandler } from './WindowHelper';
 import { WindowFactory } from '../../Application/MainWindow';
+
+const mainWindowConfig = {
+    width: 600,
+    height: 400,
+    webPreferences: {
+        preload: path.join(rootDir, 'preload.js'),
+    },
+};
 
 const defaultWindowOptions: WindowOptions = {
     ...mainWindowConfig,
