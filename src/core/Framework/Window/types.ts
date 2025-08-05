@@ -8,7 +8,8 @@ export interface CreateWindowOptions {
     };
 }
 
-export interface WindowOptions extends CreateWindowOptions {
+export interface WindowOptions {
+    createOptions: CreateWindowOptions;
     isDev: boolean;
     openDevTools: boolean;
     devServerUrl: string;
