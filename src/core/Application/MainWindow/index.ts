@@ -1,4 +1,4 @@
 export * from './types';
-export * from './CreateWindow';
-export * from './Quit';
-export * from './ActivateAppWindow';
+export * from './InitApp';
+export * from './QuitApp';
+export * from './ActivateApp';
