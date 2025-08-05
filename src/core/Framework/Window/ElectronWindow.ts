@@ -12,5 +12,6 @@ export function createMainWindow(
   return {
     open: () => openHandler(window, options),
     openDevTools: () => openDevToolsHandler(window, options),
+    show: () => window.show(),
   };
 }

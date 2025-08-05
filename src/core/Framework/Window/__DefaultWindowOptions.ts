@@ -5,11 +5,13 @@ import { appEnv } from '../../../../config/AppConfig';
 
 export const defaultWindowOptions: WindowOptions = {
   windowConstructorOptions: {
-    width: 600,
-    height: 400,
+    width: 960,
+    height: 540,
     webPreferences: {
       preload: path.join(rootDir, 'preload.js'),
     },
+    titleBarStyle: 'hidden',
+    show: false,
   },
   isDev: appEnv === 'development',
   openDevTools: false,

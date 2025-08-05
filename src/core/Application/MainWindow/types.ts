@@ -1,6 +1,7 @@
 export interface MainWindow {
   open: () => Promise<void>;
   openDevTools: () => void;
+  show: () => void;
 }
 
 export interface WindowOptions {
