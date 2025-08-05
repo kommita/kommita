@@ -6,6 +6,7 @@ import { OpenDevToolsHandler, OpenHandler, WindowMaker, WindowOptions } from './
 test('create electron window', () => {
   const windowMock = {
     show: vi.fn(),
+    close: vi.fn(),
   };
   const maker = vi.fn().mockReturnValue(windowMock) as WindowMaker;
   const openHandler = vi.fn() as OpenHandler;
@@ -27,7 +28,9 @@ test('create electron window', () => {
   window.openDevTools();
   window.open();
   window.show();
+  window.close();
   expect(openHandler).toHaveBeenCalled();
   expect(openDevToolsHandler).toHaveBeenCalled();
   expect(windowMock.show).toHaveBeenCalled();
+  expect(windowMock.close).toHaveBeenCalled();
 });

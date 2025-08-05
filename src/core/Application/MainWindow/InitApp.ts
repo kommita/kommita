@@ -1,10 +1,20 @@
 import { AppWindow, WindowFactory, WindowOptions } from './types';
 
-export async function initApp(createMainWindow: WindowFactory, options: WindowOptions): Promise<void> {
-  const window: AppWindow = createMainWindow();
+export async function initApp(
+  createMainWindow: WindowFactory,
+  createSplashScreen: WindowFactory,
+  options: WindowOptions
+): Promise<void> {
+  const splashScreen: AppWindow = createSplashScreen();
+  await splashScreen.open();
 
-  await window.open();
-  if (options.openDevTools) window.openDevTools();
+  const mainWindow: AppWindow = createMainWindow();
+  await mainWindow.open();
+  if (options.openDevTools) mainWindow.openDevTools();
 
-  window.show();
+  // simulate loading time
+  await new Promise(resolve => setTimeout(resolve, 1000));
+  splashScreen.close();
+
+  mainWindow.show();
 }

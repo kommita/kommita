@@ -4,7 +4,7 @@ import { WindowFactory } from '../../Application/MainWindow';
 import { partial } from 'ramda';
 import { createElectronWindow } from './ElectronWindow';
 import { openDevToolsHandler, openHandler } from './WindowHelper';
-import { mainWindowOptions } from './__WindowOptions';
+import { mainWindowOptions, splashScreenOptions } from './__WindowOptions';
 
 const windowMaker: WindowMaker = (options: CreateWindowOptions) => new BrowserWindow(options);
 
@@ -15,3 +15,4 @@ const createWindow = partial(createElectronWindow, [
 ]);
 
 export const createMainWindow: WindowFactory = () => createWindow(mainWindowOptions);
+export const createSplashScreen: WindowFactory = () => createWindow(splashScreenOptions);

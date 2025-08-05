@@ -17,3 +17,20 @@ export const mainWindowOptions: WindowOptions = {
   devServerUrl: MAIN_WINDOW_VITE_DEV_SERVER_URL,
   mainWindowURL: path.join(rootDir, `../renderer/${MAIN_WINDOW_VITE_NAME}/index.html`)
 };
+
+export const splashScreenOptions: WindowOptions = {
+  windowConstructorOptions: {
+    width: 600,
+    height: 400,
+    webPreferences: {
+      preload: path.join(rootDir, 'preload.js'),
+    },
+    frame: false,
+    transparent: true,
+    resizable: false,
+    center: true,
+  },
+  isDev: appEnv === 'development',
+  devServerUrl: MAIN_WINDOW_VITE_DEV_SERVER_URL + '/splash.html',
+  mainWindowURL: path.join(rootDir, `../renderer/${MAIN_WINDOW_VITE_NAME}/splash.html`)
+};
