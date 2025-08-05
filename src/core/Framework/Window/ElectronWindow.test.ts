@@ -17,7 +17,6 @@ test('create electron window', () => {
       webPreferences: { preload: 'path/to/preload.js' },
     },
     isDev: true,
-    openDevTools: true,
     devServerUrl: 'http://localhost:3000',
     mainWindowURL: 'path/to/main.html'
   };
