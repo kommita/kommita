@@ -10,6 +10,7 @@ export function createElectronWindow(
     const window = makeWindow(options.windowConstructorOptions);
 
     return {
+        ...window,
         open: () => openHandler(window, options),
         openDevTools: () => openDevToolsHandler(window, options),
     };
