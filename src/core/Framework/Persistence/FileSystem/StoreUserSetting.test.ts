@@ -11,14 +11,11 @@ test('store user setting', async function () {
     },
   };
   const currentDirectory = import.meta.dirname;
-  const fileSystem: FileManager = {
-    writeFile: vi.fn(),
-    readFile: vi.fn(),
-  } as unknown as FileManager;
+  const fileManager: FileManager = { writeFile: vi.fn() } as unknown as FileManager;
 
-  await storeUserSetting(fileSystem, currentDirectory, userSetting);
+  await storeUserSetting(fileManager, currentDirectory, userSetting);
 
-  expect(fileSystem.writeFile).toHaveBeenCalledWith(
+  expect(fileManager.writeFile).toHaveBeenCalledWith(
     `${currentDirectory}/user-settings.json`,
     JSON.stringify(userSetting)
   );
