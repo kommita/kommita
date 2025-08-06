@@ -14,5 +14,6 @@ export function createElectronWindow(
     openDevTools: () => openDevToolsHandler(window, options),
     show: () => window.show(),
     close: () => window.close(),
+    resize: (width: number, height: number) => window.setSize(width, height),
   };
 }
