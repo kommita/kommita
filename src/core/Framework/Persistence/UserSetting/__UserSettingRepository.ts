@@ -15,12 +15,12 @@ const fileManager: FileManager = {
 };
 
 const settingPath = app.getPath('userData');
-const find = partial(findUserSetting, [fileManager, settingPath, defaultUserSetting]);
-const store = partial(storeUserSetting, [fileManager, settingPath]);
-const patch = partial(patchUserSetting, [find, store]);
+const find = partial(findUserSetting, [fileManager, settingPath, defaultUserSetting]) as UserSettingRepository['find'];
+const save = partial(storeUserSetting, [fileManager, settingPath]);
+const patch = partial(patchUserSetting, [find, save]);
 
 export const userSettingRepository: UserSettingRepository = {
   find,
-  store,
+  save,
   patch,
-} as unknown as UserSettingRepository;
+};
