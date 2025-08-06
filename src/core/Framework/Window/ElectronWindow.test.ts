@@ -7,6 +7,7 @@ test('create electron window', () => {
   const windowMock = {
     show: vi.fn(),
     close: vi.fn(),
+    setSize: vi.fn(),
   };
   const maker = vi.fn().mockReturnValue(windowMock) as WindowMaker;
   const openHandler = vi.fn() as OpenHandler;
@@ -29,8 +30,10 @@ test('create electron window', () => {
   window.open();
   window.show();
   window.close();
+  window.resize(1024, 768);
   expect(openHandler).toHaveBeenCalled();
   expect(openDevToolsHandler).toHaveBeenCalled();
   expect(windowMock.show).toHaveBeenCalled();
   expect(windowMock.close).toHaveBeenCalled();
+  expect(windowMock.setSize).toHaveBeenCalledWith(1024, 768);
 });

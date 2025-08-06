@@ -3,6 +3,7 @@ export interface AppWindow {
   openDevTools: () => void;
   show: () => void;
   close: () => void;
+  resize: (width: number, height: number) => void;
 }
 
 export interface WindowOptions {
