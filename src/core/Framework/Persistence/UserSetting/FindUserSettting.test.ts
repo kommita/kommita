@@ -7,7 +7,6 @@ describe('Find user setting', () => {
   const defaultSetting = { window: { width: 800, height: 600 } } as unknown as UserSetting;
   test('it should find default user settings when no settings file exists', async () => {
     const fileManager: FileManager = { exists: vi.fn().mockReturnValue(false) } as unknown as FileManager;
-
     const path = '/path/to/settings';
 
     const actual = await findUserSetting(fileManager, path, defaultSetting);
