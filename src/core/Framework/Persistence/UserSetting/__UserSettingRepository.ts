@@ -1,7 +1,7 @@
 import { FileManager } from './types';
 import * as fs from 'node:fs';
 import { partial } from 'ramda';
-import { findUserSetting } from './FindUserSettting';
+import { findUserSetting } from './FindUserSetting';
 import { storeUserSetting } from './StoreUserSetting';
 import { patchUserSetting } from './PatchUserSetting';
 import { UserSettingRepository } from '../../../Domain';

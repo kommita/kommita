@@ -1,7 +1,7 @@
 import { describe, expect, test, vi } from 'vitest';
 import { FileManager } from './types';
 import { UserSetting } from '../../../Domain';
-import { findUserSetting } from './FindUserSettting';
+import { findUserSetting } from './FindUserSetting';
 
 describe('Find user setting', () => {
   const defaultSetting = { window: { width: 800, height: 600 } } as unknown as UserSetting;
