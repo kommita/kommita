@@ -1,4 +1,5 @@
-import { AppWindow, WindowFactory, WindowOptions } from './types';
+import { AppWindow, InitAppResult, WindowOptions } from './types';
+import { WindowFactory } from '../Startup';
 
 async function openSplashScreen(createSplashScreen: WindowFactory): Promise<AppWindow> {
   const splashScreen: AppWindow = createSplashScreen();
@@ -30,9 +31,11 @@ export async function initApp(
   createMainWindow: WindowFactory,
   createSplashScreen: WindowFactory,
   options: WindowOptions
-): Promise<void> {
+): Promise<InitAppResult> {
   const splashScreen = options.showSplashScreen ? await openSplashScreen(createSplashScreen) : null;
   const mainWindow = await openMainWindow(createMainWindow, options);
 
   await switchScreens(splashScreen, mainWindow);
+
+  return { mainWindow, splashScreen };
 }
