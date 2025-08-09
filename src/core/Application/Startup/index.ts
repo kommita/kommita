@@ -1,3 +1,3 @@
 export * from './HandleStartup';
-export * from './ReadyAppHandler';
+export * from './InitApp';
 export { WindowFactory } from './type';
