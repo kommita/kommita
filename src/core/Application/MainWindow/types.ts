@@ -18,10 +18,6 @@ export interface WindowOptions {
   showSplashScreen: boolean;
 }
 
-export interface WindowFactory {
-  (): AppWindow;
-}
-
 export interface InitAppResult {
   mainWindow: AppWindow;
   splashScreen: AppWindow | null;

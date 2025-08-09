@@ -1,10 +1,10 @@
 import { CreateWindowOptions, WindowMaker } from './types';
 import { BrowserWindow } from 'electron';
-import { WindowFactory } from '../../Application/MainWindow';
 import { partial } from 'ramda';
 import { createElectronWindow } from './ElectronWindow';
 import { openDevToolsHandler, openHandler } from './WindowHelper';
 import { mainWindowOptions, splashScreenOptions } from './__WindowOptions';
+import { WindowFactory } from '../../Application/Startup';
 
 const windowMaker: WindowMaker = (options: CreateWindowOptions) => new BrowserWindow(options);
 

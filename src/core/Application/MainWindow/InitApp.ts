@@ -1,4 +1,5 @@
-import { AppWindow, InitAppResult, WindowFactory, WindowOptions } from './types';
+import { AppWindow, InitAppResult, WindowOptions } from './types';
+import { WindowFactory } from '../Startup';
 
 async function openSplashScreen(createSplashScreen: WindowFactory): Promise<AppWindow> {
   const splashScreen: AppWindow = createSplashScreen();

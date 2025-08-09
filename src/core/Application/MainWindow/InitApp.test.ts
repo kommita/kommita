@@ -1,6 +1,7 @@
 import { describe, expect, test, vi } from 'vitest';
-import { AppWindow, WindowFactory } from './types';
+import { AppWindow } from './types';
 import { initApp } from './InitApp';
+import { WindowFactory } from '../Startup';
 
 describe('App Init', () => {
   const mainWindow: AppWindow = {
