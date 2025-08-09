@@ -1,5 +1,4 @@
 import { AppWindow, WindowFactory, WindowOptions } from './types';
-import { UserSetting, UserSettingRepository } from '../../Domain';
 
 async function openSplashScreen(createSplashScreen: WindowFactory) {
   const splashScreen: AppWindow = createSplashScreen();
@@ -14,12 +13,7 @@ async function openMainWindow(createMainWindow: WindowFactory, options: WindowOp
   return mainWindow;
 }
 
-async function restoreUserSetting(userSettingRepository: UserSettingRepository, mainWindow: AppWindow) {
-  const userSetting: UserSetting = await userSettingRepository.find();
-  const { width, height } = userSetting.window;
-  mainWindow.resize(width, height);
-
-  // simulate loading time
+async function simulateLoadingTime() {
   await new Promise(resolve => setTimeout(resolve, 1000));
 }
 
@@ -31,13 +25,12 @@ function switchScreens(splashScreen: AppWindow, mainWindow: AppWindow) {
 export async function initApp(
   createMainWindow: WindowFactory,
   createSplashScreen: WindowFactory,
-  userSettingRepository: UserSettingRepository,
   options: WindowOptions
 ): Promise<void> {
   const splashScreen = await openSplashScreen(createSplashScreen);
   const mainWindow = await openMainWindow(createMainWindow, options);
 
-  await restoreUserSetting(userSettingRepository, mainWindow);
-  
+  await simulateLoadingTime();
+
   switchScreens(splashScreen, mainWindow);
 }

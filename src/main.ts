@@ -6,7 +6,6 @@ import { appEnv } from '../config/AppConfig';
 import { Platform } from './core/Application';
 import { BrowserWindow } from 'electron';
 import { createMainWindow, createSplashScreen } from './core/Framework/Window';
-import { userSettingRepository } from './core/Framework/Persistence/UserSetting';
 
 handleStartup(shouldQuit, app);
 
@@ -14,7 +13,7 @@ const windowOptions: WindowOptions = {
   openDevTools: appEnv !== 'production',
 };
 
-const initAppHandler = partial(initApp, [createMainWindow, createSplashScreen, userSettingRepository, windowOptions]);
+const initAppHandler = partial(initApp, [createMainWindow, createSplashScreen, windowOptions]);
 app.on('ready', initAppHandler);
 
 const platform: Platform = process.platform as Platform;
