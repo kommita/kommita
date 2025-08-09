@@ -1,7 +1,7 @@
 import { handleStartup } from './core/Application/Startup';
 import { app, shouldQuit } from './core/Framework/App';
 import { initApp, quitApp, reCreateMainWindow, WindowOptions } from './core/Application/MainWindow';
-import { partial, pipe } from 'ramda';
+import { partial } from 'ramda';
 import { appEnv } from '../config/AppConfig';
 import { Platform } from './core/Application';
 import { BrowserWindow } from 'electron';
@@ -18,12 +18,11 @@ function disableSplashScreen(): void {
   windowOptions.showSplashScreen = false;
 }
 
-const initAppHandler = pipe(
-  // Initialize the app with main window and splash screen
-  partial(initApp, [createMainWindow, createSplashScreen, windowOptions]),
-  // pipeline all after initialization steps
-  disableSplashScreen
-);
+const initAppHandler = async () => {
+  const init = partial(initApp, [createMainWindow, createSplashScreen]);
+  await init(windowOptions);
+  disableSplashScreen();
+};
 app.on('ready', initAppHandler);
 
 const platform: Platform = process.platform as Platform;
