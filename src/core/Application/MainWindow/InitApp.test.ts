@@ -20,7 +20,10 @@ describe('App Init', () => {
     const createMainWindow: WindowFactory = vi.fn().mockReturnValue(mainWindow);
     const createSplashScreen: WindowFactory = vi.fn().mockReturnValue(splashScreen);
 
-    await initApp(createMainWindow, createSplashScreen, { openDevTools: false });
+    await initApp(createMainWindow, createSplashScreen, {
+      openDevTools: false,
+      showSplashScreen: true,
+    });
 
     expect(createSplashScreen).toHaveBeenCalledTimes(1);
     expect(splashScreen.open).toHaveBeenCalledTimes(1);
@@ -35,8 +38,26 @@ describe('App Init', () => {
     const createMainWindow: WindowFactory = vi.fn().mockReturnValue(mainWindow);
     const createSplashScreen: WindowFactory = vi.fn().mockReturnValue(splashScreen);
 
-    await initApp(createMainWindow, createSplashScreen, { openDevTools: true });
+    await initApp(createMainWindow, createSplashScreen, {
+      openDevTools: true,
+      showSplashScreen: true,
+    });
 
     expect(mainWindow.openDevTools).toHaveBeenCalledTimes(1);
+  });
+
+  test('it should not show splash screen if not requested', async () => {
+    const createMainWindow: WindowFactory = vi.fn().mockReturnValue(mainWindow);
+    const createSplashScreen: WindowFactory = vi.fn().mockReturnValue(splashScreen);
+
+    await initApp(createMainWindow, createSplashScreen, {
+      openDevTools: false,
+      showSplashScreen: false,
+    });
+
+    expect(createSplashScreen).not.toHaveBeenCalled();
+    expect(createMainWindow).toHaveBeenCalled();
+    expect(mainWindow.open).toHaveBeenCalled();
+    expect(mainWindow.show).toHaveBeenCalled();
   });
 });

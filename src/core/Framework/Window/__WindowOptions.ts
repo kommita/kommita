@@ -29,9 +29,6 @@ export const splashScreenOptions: WindowOptions = {
   windowConstructorOptions: {
     width: 600,
     height: 400,
-    webPreferences: {
-      preload: path.join(rootDir, 'preload.js'),
-    },
     frame: false,
     transparent: true,
     resizable: false,
