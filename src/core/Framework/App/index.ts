@@ -3,4 +3,4 @@ import type { App } from '../../Application';
 import started from 'electron-squirrel-startup';
 
 export const app = electronApp as App;
-export const shouldQuit: boolean = started;
+export const isStarted: boolean = started;

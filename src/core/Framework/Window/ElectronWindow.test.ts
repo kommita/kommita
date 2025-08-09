@@ -1,7 +1,7 @@
 import { expect, test, vi } from 'vitest';
-import { AppWindow } from '../../Application/MainWindow';
 import { createElectronWindow } from './ElectronWindow';
 import { OpenDevToolsHandler, OpenHandler, WindowMaker, WindowOptions } from './types';
+import { AppWindow } from '../../Application';
 
 test('create electron window', () => {
   const windowMock = {

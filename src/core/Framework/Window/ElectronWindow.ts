@@ -1,5 +1,5 @@
-import { AppWindow, WindowEvent, WindowEventHandler } from '../../Application/MainWindow';
 import { OpenDevToolsHandler, OpenHandler, WindowMaker, WindowOptions } from './types';
+import { AppWindow, WindowEvent, WindowEventHandler } from '../../Application';
 
 export function createElectronWindow(
   makeWindow: WindowMaker,

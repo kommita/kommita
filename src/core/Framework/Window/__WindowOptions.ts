@@ -13,7 +13,6 @@ const windowConstructorOptions: BrowserWindowConstructorOptions = {
   webPreferences: {
     preload: path.join(rootDir, 'preload.js'),
   },
-  titleBarStyle: 'hidden',
   show: false,
   ...userSettings.window,
 };
