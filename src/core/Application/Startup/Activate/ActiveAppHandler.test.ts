@@ -1,5 +1,5 @@
 import { describe, expect, test, vi } from 'vitest';
-import { AppWindow } from '../MainWindow';
+import { AppWindow } from '../../MainWindow';
 import { activeAppHandler } from './ActiveAppHandler';
 
 describe('Active App Handler', () => {

@@ -1,4 +1,4 @@
-import { InitAppResult, WindowFactory } from './type';
+import { InitAppResult, WindowFactory } from '../type';
 
 export function initApp(createMainWindow: WindowFactory, createSplashscreen: WindowFactory): InitAppResult {
   const splashScreen = createSplashscreen();

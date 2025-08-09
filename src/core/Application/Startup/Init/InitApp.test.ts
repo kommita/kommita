@@ -1,5 +1,5 @@
 import { expect, test, vi } from 'vitest';
-import { AppWindow } from '../MainWindow';
+import { AppWindow } from '../../MainWindow';
 import { initApp } from './InitApp';
 
 test('it should create the main window and splash screen', async () => {
