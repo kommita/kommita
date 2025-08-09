@@ -1,3 +1,3 @@
 export * from './HandleStartup';
-export * from './Init/InitApp';
+export * from './Init/CreateMainWindowAndSplashScreen';
 export { WindowFactory } from './type';

@@ -1,6 +1,6 @@
 import { expect, test, vi } from 'vitest';
 import { AppWindow } from '../../MainWindow';
-import { initApp } from './InitApp';
+import { createMainWindowAndSplashScreen } from './CreateMainWindowAndSplashScreen';
 
 test('it should create the main window and splash screen', async () => {
   const mainWindow = {} as unknown as AppWindow;
@@ -8,7 +8,7 @@ test('it should create the main window and splash screen', async () => {
   const createMainWindow = vi.fn(() => mainWindow);
   const createSplashScreen = vi.fn(() => splashScreen);
 
-  const actual = initApp(createMainWindow, createSplashScreen);
+  const actual = createMainWindowAndSplashScreen(createMainWindow, createSplashScreen);
 
   expect(actual.mainWindow).toBe(mainWindow);
   expect(actual.splashScreen).toBe(splashScreen);
