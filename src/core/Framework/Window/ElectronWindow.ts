@@ -1,4 +1,4 @@
-import { AppWindow } from '../../Application/MainWindow';
+import { AppWindow, WindowEvent, WindowEventHandler } from '../../Application/MainWindow';
 import { OpenDevToolsHandler, OpenHandler, WindowMaker, WindowOptions } from './types';
 
 export function createElectronWindow(
@@ -15,5 +15,10 @@ export function createElectronWindow(
     show: () => window.show(),
     close: () => window.close(),
     resize: (width: number, height: number) => window.setSize(width, height),
+    on: (event: WindowEvent, handler: WindowEventHandler) => {
+      if (event === 'ready-to-show') {
+        window.once(event, () => handler(window as unknown as AppWindow));
+      }
+    }
   };
 }
