@@ -8,6 +8,7 @@ export interface AppWindow {
 
 export interface WindowOptions {
   openDevTools: boolean;
+  showSplashScreen: boolean;
 }
 
 export interface WindowFactory {

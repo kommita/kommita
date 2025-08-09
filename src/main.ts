@@ -11,6 +11,7 @@ handleStartup(shouldQuit, app);
 
 const windowOptions: WindowOptions = {
   openDevTools: appEnv !== 'production',
+  showSplashScreen: true,
 };
 
 const initAppHandler = partial(initApp, [createMainWindow, createSplashScreen, windowOptions]);
