@@ -14,14 +14,14 @@ const windowOptions: WindowOptions = {
   showSplashScreen: true,
 };
 
-function disableSplashScreen(): void {
-  windowOptions.showSplashScreen = false;
-}
+const reActivateWindowOptions: WindowOptions = {
+  ...windowOptions,
+  showSplashScreen: false,
+};
 
 const initAppHandler = async () => {
   const init = partial(initApp, [createMainWindow, createSplashScreen]);
   await init(windowOptions);
-  disableSplashScreen();
 };
 app.on('ready', initAppHandler);
 
@@ -29,5 +29,5 @@ const platform: Platform = process.platform as Platform;
 const quitAppHandler = partial(quitApp, [app, platform]);
 app.on('window-all-closed', quitAppHandler);
 
-const activateAppHandler = partial(reCreateMainWindow, [partial(initApp, [createMainWindow, createSplashScreen, windowOptions])]);
+const activateAppHandler = partial(reCreateMainWindow, [partial(initApp, [createMainWindow, createSplashScreen, reActivateWindowOptions])]);
 app.on('activate', () => activateAppHandler(BrowserWindow.getAllWindows().length));
