@@ -17,8 +17,12 @@ async function simulateLoadingTime(): Promise<void> {
   await new Promise(resolve => setTimeout(resolve, 1000));
 }
 
-function switchScreens(splashScreen: AppWindow | null, mainWindow: AppWindow): void {
-  if (null !== splashScreen) splashScreen.close();
+async function switchScreens(splashScreen: AppWindow | null, mainWindow: AppWindow): Promise<void> {
+  if (null !== splashScreen) {
+    await simulateLoadingTime();
+    splashScreen.close();
+  }
+
   mainWindow.show();
 }
 
@@ -30,7 +34,5 @@ export async function initApp(
   const splashScreen = options.showSplashScreen ? await openSplashScreen(createSplashScreen) : null;
   const mainWindow = await openMainWindow(createMainWindow, options);
 
-  await simulateLoadingTime();
-
-  switchScreens(splashScreen, mainWindow);
+  await switchScreens(splashScreen, mainWindow);
 }
