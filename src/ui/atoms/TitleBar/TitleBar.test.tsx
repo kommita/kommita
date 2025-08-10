@@ -18,4 +18,10 @@ describe('Title-bar component', () => {
 
     expect(element).toBeInTheDocument();
   });
+
+  test('it should fail if both children and title are provided together', () => {
+    expect(() => {
+      render(<TitleBar title='Test title'><p>Test title</p></TitleBar>);
+    }).toThrowError('TitleBar component should not have both children and title props.');
+  });
 });
