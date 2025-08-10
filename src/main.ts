@@ -1,7 +1,7 @@
 import { handleWindowsStart } from './core/Application/OnStart';
 import { app, isStartedOnWindows } from './core/Framework/App';
 import { AppWindow, Platform } from './core/Application';
-import { createMainWindow, createSplashScreen, windowsCount } from './core/Framework/Window';
+import { createMainWindow, createSplashScreen, getWindowsCount } from './core/Framework/Window';
 import { switchScreens } from './core/Application/OnReady';
 import { quitApp } from './core/Application/OnWindowAllClosed';
 import { openDevTools } from '../config/AppConfig';
@@ -28,7 +28,7 @@ app.on('window-all-closed', () => {
 });
 
 app.on('activate', async () => {
-  if (0 === windowsCount) {
+  if (0 === getWindowsCount()) {
     const mainWindow = createMainWindow();
     await mainWindow.open();
     mainWindow.on('ready-to-show', () => mainWindow.show());
