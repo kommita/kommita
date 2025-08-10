@@ -10,4 +10,12 @@ describe('Title-bar component', () => {
 
     expect(element).toBeInTheDocument();
   });
+
+  test('it should render title if provided', () => {
+    render(<TitleBar title='Test title' />);
+
+    const element = screen.getByText('Test title');
+
+    expect(element).toBeInTheDocument();
+  });
 });
