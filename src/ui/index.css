@@ -32,15 +32,30 @@
 
 @theme .dark {
     /* Color scheme */
-    --color-accent: #FF5A1F; /* Brand color */
-    --color-dark: #2E3440; /* Main canvas */
-    --color-surface: #3B4252; /* Cards, panes.*/
-    --color-primary: #ECEFF4; /* Main text */
-    --color-secondary: #D8DEE9; /* Hints, meta.*/
-    --color-border: #434C5E; /* Subtle borders.*/
-    --color-success: #A3BE8C;
-    --color-warning: #EBCB8B;
-    --color-danger: #BF616A;
+    --color-accent: #FF5A1F;        /* Primary Accent: Kommita Orange */
+    --color-dark: #3B4252;          /* Background: Nord1 Deep Night */
+    --color-surface: #434C5E;       /* Surface Panels: Nord2 Steel */
+    --color-primary: #ECEFF4;       /* Text - Primary: Nord6 Snow */
+    --color-secondary: #D8DEE9;     /* Text - Secondary: Nord4 Snow */
+    --color-border: #4C566A;        /* Border/Lines: Nord3 Slate */
+    --color-success: #A3BE8C;       /* Success: Nord14 Green */
+    --color-warning: #EBCB8B;       /* Warning: Nord13 Yellow */
+    --color-danger: #BF616A;        /* Danger: Nord11 Red */
+    --color-button-hover: #FF7333;  /* Button Hover: Orange Bright */
+}
+
+@theme .light {
+    /* Color scheme */
+    --color-accent: #FF5A1F;      /* Primary Accent: Kommita Orange */
+    --color-dark: #E5E9F0;        /* Background: Nord5 Snow */
+    --color-surface: #FFFFFF;     /* Cards, panes: white for light theme */
+    --color-primary: #2E3440;     /* Text - Primary: Nord0 Night */
+    --color-secondary: #4C566A;   /* Text - Secondary: Nord3 Slate */
+    --color-border: #D8DEE9;      /* Border/Lines: Nord4 Snow */
+    --color-success: #A3BE8C;     /* Success: Nord14 Green */
+    --color-warning: #EBCB8B;     /* Warning: Nord13 Yellow */
+    --color-danger: #BF616A;      /* Danger: Nord11 Red */
+    --color-button-hover: #FF6E3A;/* Button Hover: Orange Tint */
 }
 
 @layer utilities {
