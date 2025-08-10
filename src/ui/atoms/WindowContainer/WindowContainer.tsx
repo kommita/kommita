@@ -4,7 +4,7 @@ interface Props {
   children?: ReactNode;
 }
 
-export function MainWindow(props: Props) {
+export function WindowContainer(props: Props) {
   return (
     <div>
       {props.children}
