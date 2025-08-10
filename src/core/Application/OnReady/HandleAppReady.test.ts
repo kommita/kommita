@@ -1,8 +1,8 @@
 import { describe, expect, test, vi } from 'vitest';
-import { handleAppReady } from './HandleAppReady';
+import { switchScreens } from './SwitchScreens';
 import { AppWindow } from '../types';
 
-describe('Handle app ready', () => {
+describe('Switch screens', () => {
   const main: AppWindow = {
     open: vi.fn(),
     on: vi.fn((event, handler) => {
@@ -21,25 +21,25 @@ describe('Handle app ready', () => {
   const wait = vi.fn();
 
   test('it should open splash screen', async () => {
-    await handleAppReady(main, splash, wait);
+    await switchScreens(main, splash, wait);
 
     expect(splash.open).toHaveBeenCalled();
   });
 
   test('it should open main window', async () => {
-    await handleAppReady(main, splash, wait);
+    await switchScreens(main, splash, wait);
 
     expect(main.open).toHaveBeenCalled();
   });
 
   test('it should close splash screen when main window is ready', async () => {
-    await handleAppReady(main, splash, wait);
+    await switchScreens(main, splash, wait);
 
     expect(splash.close).toHaveBeenCalled();
   });
 
   test('it should show main window when ready', async () => {
-    await handleAppReady(main, splash, wait);
+    await switchScreens(main, splash, wait);
 
     expect(main.show).toHaveBeenCalled();
   });

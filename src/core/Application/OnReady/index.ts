@@ -1,1 +1,1 @@
-export * from './HandleAppReady';
+export * from './SwitchScreens';

@@ -1,6 +1,6 @@
 import { AppWindow } from '../types';
 
-export async function handleAppReady(
+export async function switchScreens(
   main: AppWindow,
   splash: AppWindow,
   wait: () => Promise<void>

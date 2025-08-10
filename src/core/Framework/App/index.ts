@@ -3,4 +3,4 @@ import type { App } from '../../Application';
 import started from 'electron-squirrel-startup';
 
 export const app = electronApp as App;
-export const isStarted: boolean = started;
+export const isStartedOnWindows: boolean = started;
