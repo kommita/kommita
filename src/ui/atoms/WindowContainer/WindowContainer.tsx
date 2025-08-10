@@ -6,7 +6,7 @@ interface Props {
 
 export function WindowContainer(props: Props) {
   return (
-    <div className='h-screen flex flex-col bg-[#2e3440] text-white font-inter'>
+    <div className='h-screen flex flex-col bg-dark text-primary font-inter text-sm'>
       {props.children}
     </div>
   );
