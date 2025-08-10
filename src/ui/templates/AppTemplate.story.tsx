@@ -15,13 +15,6 @@ export const Default: Story = {
   }
 };
 
-export const WithTitle: Story = {
-  args: {
-    title: 'My App',
-    children: <p>Hello, world!</p>,
-  }
-};
-
 export const WithTitleBar: Story = {
   args: {
     titleBar: <TitleBar title='Custom title bar' />,
