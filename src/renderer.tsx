@@ -7,4 +7,4 @@ import { App } from './ui/App';
 const appElement = document.getElementById('app');
 if (!appElement) throw new Error('No app element found');
 
-createRoot(appElement).render(<App/>);
+createRoot(appElement).render(<App />);

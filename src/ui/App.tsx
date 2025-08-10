@@ -7,7 +7,7 @@ export function App() {
     <StrictMode>
       <HashRouter>
         <Routes>
-          <Route path='/' element={<HomePage/>}/>
+          <Route path='/' element={<HomePage />} />
         </Routes>
       </HashRouter>
     </StrictMode>
