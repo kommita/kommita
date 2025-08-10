@@ -4,6 +4,11 @@
     "es6": true,
     "node": true
   },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/eslint-recommended",
@@ -11,7 +16,8 @@
     "plugin:import/recommended",
     "plugin:import/electron",
     "plugin:import/typescript",
-    "plugin:storybook/recommended"
+    "plugin:storybook/recommended",
+    "plugin:react/recommended"
   ],
   "parser": "@typescript-eslint/parser",
   "ignorePatterns": [
@@ -21,6 +27,15 @@
     "indent": [
       "error",
       2
+    ],
+    "react/react-in-jsx-scope": "off",
+    "react/jsx-tag-spacing": [
+      "error",
+      {
+        "beforeSelfClosing": "always",
+        "afterOpening": "never",
+        "beforeClosing": "never"
+      }
     ]
   }
 }

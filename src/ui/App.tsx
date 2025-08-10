@@ -1,3 +1,15 @@
+import { HashRouter, Route, Routes } from 'react-router-dom';
+import { StrictMode } from 'react';
+import { HomePage } from './pages/HomePage';
+
 export function App() {
-  return <h1 className='text-3xl font-bold underline'>Hello, Tailwind!</h1>;
+  return (
+    <StrictMode>
+      <HashRouter>
+        <Routes>
+          <Route path='/' element={<HomePage />} />
+        </Routes>
+      </HashRouter>
+    </StrictMode>
+  );
 }
