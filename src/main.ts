@@ -8,7 +8,7 @@ import { openDevTools } from '../config/AppConfig';
 
 handleWindowsStart(isStartedOnWindows, app);
 
-async function commonHandler(mainWindow: AppWindow): Promise<void> {
+async function main(mainWindow: AppWindow): Promise<void> {
   if (openDevTools) mainWindow.openDevTools();
 }
 
@@ -20,7 +20,7 @@ app.on('ready', async () => {
     await new Promise(resolve => setTimeout(resolve, 1000));
   });
 
-  await commonHandler(mainWindow);
+  await main(mainWindow);
 });
 
 app.on('window-all-closed', () => {
@@ -32,6 +32,6 @@ app.on('activate', async () => {
     const mainWindow = createMainWindow();
     await mainWindow.open();
     mainWindow.on('ready-to-show', () => mainWindow.show());
-    await commonHandler(mainWindow);
+    await main(mainWindow);
   }
 });
