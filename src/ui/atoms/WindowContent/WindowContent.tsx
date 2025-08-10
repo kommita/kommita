@@ -6,7 +6,7 @@ interface Props {
 
 export function WindowContent(props: Props) {
   return (
-    <main>
+    <main className='flex-1 overflow-auto'>
       {props.children}
     </main>
   );
