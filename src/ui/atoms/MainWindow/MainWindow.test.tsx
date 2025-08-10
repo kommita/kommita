@@ -1,10 +1,10 @@
 import { describe, expect, test } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import Window from './Window';
+import { MainWindow } from './MainWindow';
 
-describe('Window component', () => {
+describe('Main window component', () => {
   test('it should render children', () => {
-    render(<Window><p>Test text</p></Window>);
+    render(<MainWindow><p>Test text</p></MainWindow>);
 
     const testText = screen.getByText('Test text');
 
