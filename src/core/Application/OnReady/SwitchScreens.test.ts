@@ -1,4 +1,4 @@
-import { describe, expect, test, vi } from 'vitest';
+import { describe, expect, Mock, test, vi } from 'vitest';
 import { switchScreens } from './SwitchScreens';
 import { AppWindow } from '../types';
 
@@ -25,21 +25,27 @@ describe('Switch screens', () => {
 
   test(
     `Execution order of the switchScreens function:
-    1.Open splash screen.
-    2.Simulate loading time.
-    3.Open main window.
+    1. Open splash screen.
+    2. Simulate loading time.
+    3. Open main window.
     4. Show main window when ready.
     5. Close splash screen.
     `
     , async () => {
       await switchScreens(main, splash, simulateLoadingTime);
 
-      expect(openSplash.mock.invocationCallOrder).toEqual([1]);
-      expect(simulateLoadingTime.mock.invocationCallOrder).toEqual([2]);
-      expect(openMain.mock.invocationCallOrder).toEqual([3]);
-      expect(onHandler.mock.invocationCallOrder).toEqual([4]);
+      expect(openSplash).toHaveBeenCalled();
+      expect(simulateLoadingTime).toHaveBeenCalled();
+      expect(openMain).toHaveBeenCalled();
       expect(onHandler).toHaveBeenCalledWith('ready-to-show', expect.any(Function));
-      expect(showMain.mock.invocationCallOrder).toEqual([5]);
-      expect(closeSplash.mock.invocationCallOrder).toEqual([6]);
+      expect(showMain).toHaveBeenCalled();
+      expect(closeSplash).toHaveBeenCalled();
+
+      const getOrder = (fn: Mock<(...args: unknown[]) => unknown>) => fn.mock.invocationCallOrder[0];
+      expect(getOrder(openSplash)).toBeLessThan(getOrder(simulateLoadingTime));
+      expect(getOrder(simulateLoadingTime)).toBeLessThan(getOrder(openMain));
+      expect(getOrder(openMain)).toBeLessThan(getOrder(onHandler));
+      expect(getOrder(onHandler)).toBeLessThan(getOrder(showMain));
+      expect(getOrder(showMain)).toBeLessThan(getOrder(closeSplash));
     });
 });
