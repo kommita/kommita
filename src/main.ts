@@ -1,34 +1,37 @@
-import { handleStartup } from './core/Application/Startup';
-import { app, shouldQuit } from './core/Framework/App';
-import { initApp, quitApp, reCreateMainWindow, WindowOptions } from './core/Application/MainWindow';
-import { partial, pipe } from 'ramda';
-import { appEnv } from '../config/AppConfig';
-import { Platform } from './core/Application';
-import { BrowserWindow } from 'electron';
-import { createMainWindow, createSplashScreen } from './core/Framework/Window';
+import { handleWindowsStart } from './core/Application/OnStart';
+import { app, isStartedOnWindows } from './core/Framework/App';
+import { AppWindow, Platform } from './core/Application';
+import { createMainWindow, createSplashScreen, getWindowsCount } from './core/Framework/Window';
+import { switchScreens } from './core/Application/OnReady';
+import { quitApp } from './core/Application/OnWindowAllClosed';
+import { openDevTools } from '../config/AppConfig';
 
-handleStartup(shouldQuit, app);
+handleWindowsStart(isStartedOnWindows, app);
 
-const windowOptions: WindowOptions = {
-  openDevTools: appEnv !== 'production',
-  showSplashScreen: true,
-};
-
-function disableSplashScreen(): void {
-  windowOptions.showSplashScreen = false;
+async function main(mainWindow: AppWindow): Promise<void> {
+  if (openDevTools) mainWindow.openDevTools();
 }
 
-const initAppHandler = pipe(
-  // Initialize the app with main window and splash screen
-  partial(initApp, [createMainWindow, createSplashScreen, windowOptions]),
-  // pipeline all after initialization steps
-  disableSplashScreen
-);
-app.on('ready', initAppHandler);
+app.on('ready', async () => {
+  const splashScreen = createSplashScreen();
+  const mainWindow = createMainWindow();
 
-const platform: Platform = process.platform as Platform;
-const quitAppHandler = partial(quitApp, [app, platform]);
-app.on('window-all-closed', quitAppHandler);
+  await switchScreens(mainWindow, splashScreen, async function (): Promise<void> {
+    await new Promise(resolve => setTimeout(resolve, 1000));
+  });
 
-const activateAppHandler = partial(reCreateMainWindow, [partial(initApp, [createMainWindow, createSplashScreen, windowOptions])]);
-app.on('activate', () => activateAppHandler(BrowserWindow.getAllWindows().length));
+  await main(mainWindow);
+});
+
+app.on('window-all-closed', () => {
+  quitApp(app, process.platform as Platform);
+});
+
+app.on('activate', async () => {
+  if (0 === getWindowsCount()) {
+    const mainWindow = createMainWindow();
+    await mainWindow.open();
+    mainWindow.on('ready-to-show', () => mainWindow.show());
+    await main(mainWindow);
+  }
+});
