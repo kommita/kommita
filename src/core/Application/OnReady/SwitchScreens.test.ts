@@ -7,7 +7,7 @@ describe('Switch screens', () => {
     open: vi.fn(),
     on: vi.fn((event, handler) => {
       if (event === 'ready-to-show') {
-        handler();
+        handler(main);
       }
     }),
     show: vi.fn(),
