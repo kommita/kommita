@@ -16,18 +16,12 @@ describe('App Template', () => {
     expect(childElement).toBeInTheDocument();
   });
 
-  test('it should render header title if provided', () => {
-    render(<AppTemplate title='Test title'></AppTemplate>);
+  test('it should add default title bar if not provided', () => {
+    render(<AppTemplate />);
+    
+    const defaultTitleBar = screen.getByRole('banner');
 
-    const titleElement = screen.getByText('Test title');
-
-    expect(titleElement).toBeInTheDocument();
-  });
-
-  test('it should fail if title & title bar provided together', () => {
-    expect(() => render(
-      <AppTemplate title='Test title' titleBar={<TitleBar />}></AppTemplate>
-    )).toThrowError('You cannot use both title and titleBar props together.');
+    expect(defaultTitleBar).toBeInTheDocument();
   });
 
   test('it should render title bar if provided', () => {
