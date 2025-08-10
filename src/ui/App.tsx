@@ -1,9 +1,15 @@
+import { HashRouter, Route, Routes } from 'react-router-dom';
 import { StrictMode } from 'react';
+import { HomePage } from './pages/HomePage';
 
 export function App() {
   return (
     <StrictMode>
-      <h1 className='text-3xl font-bold text-center underline'>Kommita!</h1>
+      <HashRouter>
+        <Routes>
+          <Route path='/' element={<HomePage/>}/>
+        </Routes>
+      </HashRouter>
     </StrictMode>
   );
 }
