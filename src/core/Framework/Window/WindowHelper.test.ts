@@ -25,7 +25,7 @@ describe('Window helper', () => {
   });
 
   describe('Open dev tools handler', () => {
-    test('it should open dev tool', () => {
+    test('it should open dev tools', () => {
       const window = { webContents: { openDevTools: vi.fn() } } as unknown as BrowserWindow;
 
       openDevToolsHandler(window);

@@ -1,46 +1,51 @@
-import { describe, expect, test, vi } from 'vitest';
+import { describe, expect, Mock, test, vi } from 'vitest';
 import { switchScreens } from './SwitchScreens';
 import { AppWindow } from '../types';
 
 describe('Switch screens', () => {
+  const openSplash = vi.fn();
+  const simulateLoadingTime = vi.fn();
+  const closeSplash = vi.fn();
+
+  const openMain = vi.fn();
+  const onHandler = vi.fn((_, handler) => handler());
+  const showMain = vi.fn();
+
   const main: AppWindow = {
-    open: vi.fn(),
-    on: vi.fn((event, handler) => {
-      if (event === 'ready-to-show') {
-        handler(main);
-      }
-    }),
-    show: vi.fn(),
+    open: openMain,
+    on: onHandler,
+    show: showMain,
   } as unknown as AppWindow;
 
   const splash: AppWindow = {
-    open: vi.fn(),
-    close: vi.fn(),
+    open: openSplash,
+    close: closeSplash,
   } as unknown as AppWindow;
 
-  const wait = vi.fn();
 
-  test('it should open splash screen', async () => {
-    await switchScreens(main, splash, wait);
+  test(
+    `Execution order of the switchScreens function:
+    1. Open splash screen.
+    2. Simulate loading time.
+    3. Open main window.
+    4. Show main window when ready.
+    5. Close splash screen.
+    `
+    , async () => {
+      await switchScreens(main, splash, simulateLoadingTime);
 
-    expect(splash.open).toHaveBeenCalled();
-  });
+      expect(openSplash).toHaveBeenCalled();
+      expect(simulateLoadingTime).toHaveBeenCalled();
+      expect(openMain).toHaveBeenCalled();
+      expect(onHandler).toHaveBeenCalledWith('ready-to-show', expect.any(Function));
+      expect(showMain).toHaveBeenCalled();
+      expect(closeSplash).toHaveBeenCalled();
 
-  test('it should open main window', async () => {
-    await switchScreens(main, splash, wait);
-
-    expect(main.open).toHaveBeenCalled();
-  });
-
-  test('it should close splash screen when main window is ready', async () => {
-    await switchScreens(main, splash, wait);
-
-    expect(splash.close).toHaveBeenCalled();
-  });
-
-  test('it should show main window when ready', async () => {
-    await switchScreens(main, splash, wait);
-
-    expect(main.show).toHaveBeenCalled();
-  });
+      const getOrder = (fn: Mock<(...args: unknown[]) => unknown>) => fn.mock.invocationCallOrder[0];
+      expect(getOrder(openSplash)).toBeLessThan(getOrder(simulateLoadingTime));
+      expect(getOrder(simulateLoadingTime)).toBeLessThan(getOrder(openMain));
+      expect(getOrder(openMain)).toBeLessThan(getOrder(onHandler));
+      expect(getOrder(onHandler)).toBeLessThan(getOrder(showMain));
+      expect(getOrder(showMain)).toBeLessThan(getOrder(closeSplash));
+    });
 });
