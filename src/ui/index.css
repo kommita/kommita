@@ -47,7 +47,12 @@
         -webkit-app-region: drag;
     }
 
-    .drag > * {
+    .drag > a,
+    .drag > button,
+    .drag > input,
+    .drag > textarea,
+    .drag > select,
+    .drag > label {
         -webkit-app-region: no-drag;
     }
 }

@@ -15,7 +15,7 @@ export function TitleBar(props: Props) {
 
   return (
     <header className={className}>
-      {props.title && <p className='drag'>{props.title}</p>}
+      {props.title && <span>{props.title}</span>}
       {props.children}
     </header>
   );
