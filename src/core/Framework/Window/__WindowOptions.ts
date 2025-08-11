@@ -14,6 +14,8 @@ const windowConstructorOptions: BrowserWindowConstructorOptions = {
     preload: path.join(rootDir, 'preload.js'),
   },
   show: false,
+  titleBarStyle: 'hidden',
+  ...(process.platform !== 'darwin' ? { titleBarOverlay: true } : {}),
   ...userSettings.window,
 };
 

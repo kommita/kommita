@@ -1,1 +1,58 @@
 @import "tailwindcss";
+
+@font-face {
+    font-family: 'Inter';
+    src: url('../../public/assets/fonts/Inter-Italic.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url('../../public/assets/fonts/Inter-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Fira Code';
+    src: url('../../public/assets/fonts/FiraCode-Light.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@theme {
+    /*Fonts*/
+    --font-inter: 'Inter', sans-serif;
+    --font-fira-code: 'Fira Code', monospace;
+
+    /* Color scheme */
+    --color-accent: #FF5A1F;        /* Primary Accent: Kommita Orange */
+    --color-dark: #3B4252;          /* Background: Nord1 Deep Night */
+    --color-surface: #434C5E;       /* Surface Panels: Nord2 Steel */
+    --color-primary: #ECEFF4;       /* Text - Primary: Nord6 Snow */
+    --color-secondary: #D8DEE9;     /* Text - Secondary: Nord4 Snow */
+    --color-border: #4C566A;        /* Border/Lines: Nord3 Slate */
+    --color-success: #A3BE8C;       /* Success: Nord14 Green */
+    --color-warning: #EBCB8B;       /* Warning: Nord13 Yellow */
+    --color-danger: #BF616A;        /* Danger: Nord11 Red */
+    --color-button-hover: #FF7333;  /* Button Hover: Orange Bright */
+}
+
+@layer utilities {
+    .drag {
+        -webkit-app-region: drag;
+    }
+
+    .drag > a,
+    .drag > button,
+    .drag > input,
+    .drag > textarea,
+    .drag > select,
+    .drag > label {
+        -webkit-app-region: no-drag;
+    }
+}
