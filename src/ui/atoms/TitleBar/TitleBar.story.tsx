@@ -3,6 +3,13 @@ import { TitleBar } from './TitleBar';
 
 const meta = {
   component: TitleBar,
+  args: {
+    title: undefined,
+    children: undefined,
+  },
+  argTypes: {
+    children: { control: false },
+  },
 } as Meta<typeof TitleBar>;
 
 export default meta;
@@ -20,8 +27,11 @@ export const WithTitle: Story = {
 
 export const WithChildren: Story = {
   args: {
-    children: <p>
-      <button className='border border-warning bg-warning text-dark p-3 rounded' onClick={() => alert('Clicked!')}>Click Me!</button>
-    </p>,
+    title: undefined,
   },
+  render: (args) => (
+    <TitleBar {...args}>
+      <button className='border border-warning bg-warning text-dark p-3 rounded' onClick={() => alert('Clicked!')}>Click Me!</button>
+    </TitleBar>
+  )
 };

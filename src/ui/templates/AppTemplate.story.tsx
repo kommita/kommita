@@ -4,20 +4,22 @@ import { TitleBar } from '../atoms/TitleBar';
 
 const meta = {
   component: AppTemplate,
+  args: {
+    titleBar: undefined,
+    children: undefined,
+  },
+  argTypes: {
+    children: { control: false }
+  }
 } as Meta<typeof AppTemplate>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-  args: {
-    children: <p>Hello, world!</p>,
-  }
-};
-
-export const WithTitleBar: Story = {
-  args: {
-    titleBar: <TitleBar title='Custom title bar' />,
-    children: <p>Hello, world!</p>,
-  }
+  render: () => (
+    <AppTemplate titleBar={<TitleBar title='Kommita' />}>
+      <h1 className='text-center'>Hello world!</h1>
+    </AppTemplate>
+  )
 };
