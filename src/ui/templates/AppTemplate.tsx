@@ -12,7 +12,7 @@ export function AppTemplate(props: Props) {
   return (
     <WindowContainer>
       {!props.titleBar && <TitleBar />}
-      {props.titleBar && props.titleBar}
+      {props.titleBar}
       <WindowContent>{props.children}</WindowContent>
     </WindowContainer>
   );
