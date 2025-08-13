@@ -60,7 +60,7 @@ export default defineConfig({
         'src/ui/App.tsx',
         'src/ui/pages/**/*.tsx',
         'src/ui/**/*.mdx',
-        'src/ui/**/*.story.@(js|jsx|mjs|ts|tsx)'
+        'src/ui/**/*.stories.@(js|jsx|mjs|ts|tsx)'
       ],
     },
   }

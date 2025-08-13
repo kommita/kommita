@@ -3,6 +3,9 @@ import '../src/ui/index.css';
 /** @type { import('@storybook/react-vite').Preview } */
 const preview = {
   parameters: {
+    docs: {
+      codePanel: true,
+    },
     controls: {
       matchers: {
         color: /(background|color)$/i,
@@ -17,6 +20,7 @@ const preview = {
       test: 'todo'
     }
   },
+  tags: ['autodocs'],
 };
 
 export default preview;
