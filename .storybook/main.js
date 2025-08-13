@@ -2,7 +2,7 @@
 const config = {
   'stories': [
     '../src/ui/**/*.mdx',
-    '../src/ui/**/*.story.@(js|jsx|mjs|ts|tsx)'
+    '../src/ui/**/*.stories.@(js|jsx|mjs|ts|tsx)'
   ],
   'addons': [
     '@chromatic-com/storybook',
