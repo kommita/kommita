@@ -77,7 +77,7 @@ describe('Window Wrapper', () => {
     expect(browserWindow.setSize).toHaveBeenCalledWith(width, height);
   });
 
-  test('it should handle to ready-to-show event', () => {
+  test('it should handle the ready-to-show event', () => {
     const sut = new WindowWrapper(browserWindow, options);
     const handler = vi.fn().mockImplementationOnce((w: AppWindow) => w);
 
