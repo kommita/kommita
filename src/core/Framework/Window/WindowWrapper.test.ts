@@ -1,0 +1,89 @@
+import { describe, expect, test, vi } from 'vitest';
+import { WindowOptions } from './types';
+import { WindowWrapper } from './WindowWrapper';
+import { BrowserWindow } from 'electron';
+import { AppWindow } from '../../Application';
+
+describe('Window Wrapper', () => {
+  const browserWindow = {
+    webContents: {
+      openDevTools: vi.fn(),
+    },
+    loadURL: vi.fn(),
+    loadFile: vi.fn(),
+    show: vi.fn(),
+    close: vi.fn(),
+    setSize: vi.fn(),
+    once: vi.fn((_, listener) => {
+      listener();
+    }),
+  } as unknown as BrowserWindow;
+
+  const options: WindowOptions = {
+    windowConstructorOptions: undefined,
+    isDev: false,
+    devServerUrl: 'http://localhost:3000',
+    mainWindowURL: 'file://path/to/index.html',
+  };
+
+  test('open dev tools', () => {
+    const sut = new WindowWrapper(browserWindow, options);
+
+    sut.openDevTools();
+
+    expect(browserWindow.webContents.openDevTools).toHaveBeenCalled();
+  });
+
+  test('open in dev mode', async () => {
+    const optionsInDevMode = { ...options, isDev: true };
+    const sut = new WindowWrapper(browserWindow, optionsInDevMode);
+
+    await sut.open();
+
+    expect(browserWindow.loadURL).toHaveBeenCalledWith(optionsInDevMode.devServerUrl);
+  });
+
+  test('open in prod mode', async () => {
+    const sut = new WindowWrapper(browserWindow, options);
+
+    await sut.open();
+
+    expect(browserWindow.loadFile).toHaveBeenCalledWith(options.mainWindowURL);
+  });
+
+  test('show window', () => {
+    const sut = new WindowWrapper(browserWindow, options);
+
+    sut.show();
+
+    expect(browserWindow.show).toHaveBeenCalled();
+  });
+
+  test('close window', () => {
+    const sut = new WindowWrapper(browserWindow, options);
+
+    sut.close();
+
+    expect(browserWindow.close).toHaveBeenCalled();
+  });
+
+  test('resize window', () => {
+    const sut = new WindowWrapper(browserWindow, options);
+    const width = 800;
+    const height = 600;
+
+    sut.resize(width, height);
+
+    expect(browserWindow.setSize).toHaveBeenCalledWith(width, height);
+  });
+
+  test('it should handle to ready-to-show event', () => {
+    const sut = new WindowWrapper(browserWindow, options);
+    const handler = vi.fn().mockImplementationOnce((w: AppWindow) => w);
+
+    sut.on('ready-to-show', handler);
+
+    expect(browserWindow.once).toHaveBeenCalledWith('ready-to-show', expect.any(Function));
+    expect(handler).toHaveBeenCalledWith(sut);
+  });
+});

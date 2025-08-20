@@ -1,4 +1,5 @@
 import { BrowserWindow, BrowserWindowConstructorOptions } from 'electron';
+import { AppWindow } from '../../Application';
 
 export type CreateWindowOptions = BrowserWindowConstructorOptions
 
@@ -13,10 +14,6 @@ export interface WindowMaker {
   (options: CreateWindowOptions): BrowserWindow;
 }
 
-export interface OpenHandler {
-  (window: BrowserWindow, options: WindowOptions): Promise<void>;
-}
-
-export interface OpenDevToolsHandler {
-  (window: BrowserWindow, options: WindowOptions): void;
+export interface AppWindowConstructor {
+  new(...args: unknown[]): AppWindow;
 }
