@@ -13,7 +13,11 @@ describe('Window Wrapper', () => {
     show: vi.fn(),
     close: vi.fn(),
     setSize: vi.fn(),
+    getSize: vi.fn(() => [800, 600]),
     once: vi.fn((_, listener) => {
+      listener();
+    }),
+    on: vi.fn((_, listener) => {
       listener();
     }),
   } as unknown as BrowserWindow;
@@ -77,13 +81,39 @@ describe('Window Wrapper', () => {
     expect(browserWindow.setSize).toHaveBeenCalledWith(width, height);
   });
 
-  test('it should handle the ready-to-show event', () => {
+  test('get window size', () => {
     const sut = new WindowWrapper(browserWindow, options);
-    const handler = vi.fn().mockImplementationOnce((w: AppWindow) => w);
 
-    sut.on('ready-to-show', handler);
+    const actual = sut.getSize();
 
-    expect(browserWindow.once).toHaveBeenCalledWith('ready-to-show', expect.any(Function));
-    expect(handler).toHaveBeenCalledWith(sut);
+    expect(actual).toEqual({ width: 800, height: 600 });
+  });
+
+  describe('Window events', () => {
+    test('unknown events should fail', () => {
+      const sut = new WindowWrapper(browserWindow, options);
+      // @ts-expect-error Testing invalid event
+      expect(() => sut.on('unknown-event', (e) => e)).toThrow('Unsupported event: unknown-event');
+    });
+
+    test('it should handle the ready-to-show event', () => {
+      const sut = new WindowWrapper(browserWindow, options);
+      const handler = vi.fn().mockImplementationOnce((w: AppWindow) => w);
+
+      sut.on('ready-to-show', handler);
+
+      expect(browserWindow.once).toHaveBeenCalledWith('ready-to-show', expect.any(Function));
+      expect(handler).toHaveBeenCalledWith(sut);
+    });
+
+    test('it should handle the resize event', () => {
+      const sut = new WindowWrapper(browserWindow, options);
+      const handler = vi.fn().mockImplementationOnce((w: AppWindow) => w);
+
+      sut.on('resize', handler);
+
+      expect(browserWindow.on).toHaveBeenCalledWith('resize', expect.any(Function));
+      expect(handler).toHaveBeenCalledWith(sut);
+    });
   });
 });
