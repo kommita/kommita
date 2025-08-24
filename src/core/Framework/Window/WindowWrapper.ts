@@ -1,6 +1,5 @@
-import { AppWindow, WindowEvent, WindowEventHandler } from '../../Application';
+import { AppWindow, WindowEvent, WindowEventHandler, WindowOptions } from '../../Application';
 import { BrowserWindow } from 'electron';
-import { WindowOptions } from './types';
 
 export class WindowWrapper implements AppWindow {
   private browserWindow: BrowserWindow;

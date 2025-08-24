@@ -20,6 +20,24 @@ export interface AppWindow {
   on: (event: WindowEvent, handler: WindowEventHandler) => void;
 }
 
+export type WindowOptions = {
+  width: number;
+  height: number;
+  frame?: boolean;
+  transparent?: boolean;
+  resizable?: boolean;
+  center?: boolean;
+  show?: boolean;
+  titleBarStyle?: 'hidden';
+  titleBarOverlay?: boolean;
+  webPreferences?: {
+    preload: string;
+  }
+  isDev: boolean;
+  devServerUrl: string;
+  mainWindowURL: string;
+};
+
 export interface WindowFactory {
-  (): AppWindow;
+  (options: WindowOptions): AppWindow;
 }

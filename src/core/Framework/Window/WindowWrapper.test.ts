@@ -1,8 +1,7 @@
 import { describe, expect, test, vi } from 'vitest';
-import { WindowOptions } from './types';
 import { WindowWrapper } from './WindowWrapper';
 import { BrowserWindow } from 'electron';
-import { AppWindow } from '../../Application';
+import { AppWindow, WindowOptions } from '../../Application';
 
 describe('Window Wrapper', () => {
   const browserWindow = {
@@ -20,10 +19,11 @@ describe('Window Wrapper', () => {
   } as unknown as BrowserWindow;
 
   const options: WindowOptions = {
-    windowConstructorOptions: undefined,
+    height: 0,
+    width: 0,
     isDev: false,
     devServerUrl: 'http://localhost:3000',
-    mainWindowURL: 'file://path/to/index.html',
+    mainWindowURL: 'file://path/to/index.html'
   };
 
   test('open dev tools', () => {
