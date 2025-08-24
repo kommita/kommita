@@ -1,42 +1,25 @@
-import { expect, test, vi } from 'vitest';
+import { describe, expect, test, vi } from 'vitest';
 import { createElectronWindow } from './ElectronWindow';
-import { OpenDevToolsHandler, OpenHandler, WindowMaker, WindowOptions } from './types';
-import { AppWindow } from '../../Application';
+import { AppWindowConstructor, WindowMaker } from './types';
+import { BrowserWindow } from 'electron';
+import { WindowOptions } from '../../Application';
 
-test('create electron window', () => {
-  const windowMock = {
-    show: vi.fn(),
-    close: vi.fn(),
-    setSize: vi.fn(),
-    once: vi.fn(),
-  };
-  const maker = vi.fn().mockReturnValue(windowMock) as WindowMaker;
-  const openHandler = vi.fn() as OpenHandler;
-  const openDevToolsHandler = vi.fn() as OpenDevToolsHandler;
-  const windowOptions: WindowOptions = {
-    windowConstructorOptions: {
+
+describe('Electron browser window', () => {
+  test('create electron window', () => {
+    const browserWindowMock = {} as unknown as BrowserWindow;
+    const windowOptions: WindowOptions = {
+      devServerUrl: '',
+      isDev: false,
+      mainWindowURL: '',
       width: 800,
-      height: 600,
-      webPreferences: { preload: 'path/to/preload.js' },
-    },
-    isDev: true,
-    devServerUrl: 'http://localhost:3000',
-    mainWindowURL: 'path/to/main.html'
-  };
-  const window: AppWindow = createElectronWindow(maker, openHandler, openDevToolsHandler, windowOptions);
+      height: 600
+    };
+    const maker = vi.fn().mockReturnValue(browserWindowMock) as WindowMaker;
+    const AppWindowWrapper = vi.fn() as unknown as AppWindowConstructor;
+    createElectronWindow(maker, AppWindowWrapper, windowOptions);
 
-  expect(maker).toHaveBeenCalledWith(windowOptions.windowConstructorOptions);
-  // For coverage purposes
-  window.openDevTools();
-  window.open();
-  window.show();
-  window.close();
-  window.resize(1024, 768);
-  window.on('ready-to-show', () => undefined);
-  expect(openHandler).toHaveBeenCalled();
-  expect(openDevToolsHandler).toHaveBeenCalled();
-  expect(windowMock.show).toHaveBeenCalled();
-  expect(windowMock.close).toHaveBeenCalled();
-  expect(windowMock.setSize).toHaveBeenCalledWith(1024, 768);
-  expect(windowMock.once).toHaveBeenCalledWith('ready-to-show', expect.any(Function));
+    expect(maker).toHaveBeenCalledWith({ width: 800, height: 600 });
+    expect(AppWindowWrapper).toHaveBeenCalledWith(browserWindowMock, windowOptions);
+  });
 });

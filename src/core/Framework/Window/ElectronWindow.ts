@@ -1,24 +1,19 @@
-import { OpenDevToolsHandler, OpenHandler, WindowMaker, WindowOptions } from './types';
-import { AppWindow, WindowEvent, WindowEventHandler } from '../../Application';
+import { AppWindowConstructor, WindowMaker } from './types';
+import { AppWindow, WindowOptions } from '../../Application';
 
-export function createElectronWindow(
-  makeWindow: WindowMaker,
-  openHandler: OpenHandler,
-  openDevToolsHandler: OpenDevToolsHandler,
-  options: WindowOptions
-): AppWindow {
-  const window = makeWindow(options.windowConstructorOptions);
+export function createElectronWindow(makeWindow: WindowMaker, AppWindow: AppWindowConstructor, options: WindowOptions): AppWindow {
+  const window = makeWindow({
+    width: options.width,
+    height: options.height,
+    frame: options.frame,
+    transparent: options.transparent,
+    resizable: options.resizable,
+    center: options.center,
+    show: options.show,
+    titleBarStyle: options.titleBarStyle,
+    titleBarOverlay: options.titleBarOverlay,
+    webPreferences: options.webPreferences,
+  });
 
-  return {
-    open: () => openHandler(window, options),
-    openDevTools: () => openDevToolsHandler(window, options),
-    show: () => window.show(),
-    close: () => window.close(),
-    resize: (width: number, height: number) => window.setSize(width, height),
-    on: (event: WindowEvent, handler: WindowEventHandler) => {
-      if (event === 'ready-to-show') {
-        window.once(event, () => handler(window as unknown as AppWindow));
-      }
-    }
-  };
+  return new AppWindow(window, options);
 }
