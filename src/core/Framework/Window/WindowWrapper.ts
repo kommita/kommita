@@ -40,15 +40,21 @@ export class WindowWrapper implements AppWindow {
   getSize(): WindowSize {
     const [width, height] = this.browserWindow.getSize();
     return { width, height };
+
   }
 
   on(event: WindowEvent, handler: WindowEventHandler): void {
-    if (event === 'ready-to-show') {
+    switch (event) {
+    case 'ready-to-show':
       this.browserWindow.once(event, () => handler(this));
-    }
+      break;
 
-    if (event === 'resize') {
-      this.browserWindow.on('resize', () => handler(this));
+    case 'resize':
+      this.browserWindow.on(event, () => handler(this));
+      break;
+
+    default:
+      throw new Error(`Unsupported event: ${event}`);
     }
   }
 }
