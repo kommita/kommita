@@ -9,11 +9,14 @@ import { UserSetting } from './core/Domain';
 import { switchScreens } from './core/Application/OnReady';
 import { splashScreenConfig } from '../config/SplashScreenConfig';
 import { mainWindowConfig } from '../config/MainWindowConfig';
+import { handleWindowResize } from './core/Application/OnResize';
 
 handleWindowsStart(isStartedOnWindows, app);
 
 async function main(mainWindow: AppWindow): Promise<void> {
   if (openDevTools) mainWindow.openDevTools();
+  
+  mainWindow.on('resize', handleWindowResize);
 }
 
 app.on('ready', async () => {
