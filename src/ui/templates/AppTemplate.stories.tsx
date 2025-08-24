@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { AppTemplate } from './AppTemplate';
-import { TitleBar } from '../atoms/TitleBar';
+import { TitleBar } from '../molecules/TitleBar';
 
 const meta = {
   component: AppTemplate,

@@ -1,7 +1,7 @@
 import { ReactElement, ReactNode } from 'react';
 import { WindowContainer } from '../atoms/WindowContainer';
-import { TitleBar } from '../atoms/TitleBar';
 import { WindowContent } from '../atoms/WindowContent';
+import { TitleBar } from '../molecules/TitleBar';
 
 interface Props {
   children?: ReactNode;

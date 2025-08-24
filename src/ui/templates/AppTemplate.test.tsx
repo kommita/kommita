@@ -1,7 +1,7 @@
 import { describe, expect, test } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { AppTemplate } from './AppTemplate';
-import { TitleBar } from '../atoms/TitleBar';
+import { TitleBar } from '../molecules/TitleBar';
 
 describe('App Template', () => {
   test('it should render children components', () => {
@@ -18,7 +18,7 @@ describe('App Template', () => {
 
   test('it should add default title bar if not provided', () => {
     render(<AppTemplate />);
-    
+
     const defaultTitleBar = screen.getByRole('banner');
 
     expect(defaultTitleBar).toBeInTheDocument();
