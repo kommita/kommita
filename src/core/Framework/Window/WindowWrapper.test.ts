@@ -13,7 +13,11 @@ describe('Window Wrapper', () => {
     show: vi.fn(),
     close: vi.fn(),
     setSize: vi.fn(),
+    getSize: vi.fn(() => [800, 600]),
     once: vi.fn((_, listener) => {
+      listener();
+    }),
+    on: vi.fn((_, listener) => {
       listener();
     }),
   } as unknown as BrowserWindow;
@@ -84,6 +88,24 @@ describe('Window Wrapper', () => {
     sut.on('ready-to-show', handler);
 
     expect(browserWindow.once).toHaveBeenCalledWith('ready-to-show', expect.any(Function));
+    expect(handler).toHaveBeenCalledWith(sut);
+  });
+
+  test('get window size', () => {
+    const sut = new WindowWrapper(browserWindow, options);
+
+    const actual = sut.getSize();
+
+    expect(actual).toEqual({ width: 800, height: 600 });
+  });
+
+  test('it should handle the resize event', () => {
+    const sut = new WindowWrapper(browserWindow, options);
+    const handler = vi.fn().mockImplementationOnce((w: AppWindow) => w);
+
+    sut.on('resize', handler);
+
+    expect(browserWindow.on).toHaveBeenCalledWith('resize', expect.any(Function));
     expect(handler).toHaveBeenCalledWith(sut);
   });
 });

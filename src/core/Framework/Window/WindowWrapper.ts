@@ -1,4 +1,4 @@
-import { AppWindow, WindowEvent, WindowEventHandler, WindowOptions } from '../../Application';
+import { AppWindow, WindowEvent, WindowEventHandler, WindowOptions, WindowSize } from '../../Application';
 import { BrowserWindow } from 'electron';
 
 export class WindowWrapper implements AppWindow {
@@ -37,9 +37,18 @@ export class WindowWrapper implements AppWindow {
     this.browserWindow.setSize(width, height);
   }
 
+  getSize(): WindowSize {
+    const [width, height] = this.browserWindow.getSize();
+    return { width, height };
+  }
+
   on(event: WindowEvent, handler: WindowEventHandler): void {
     if (event === 'ready-to-show') {
       this.browserWindow.once(event, () => handler(this));
+    }
+
+    if (event === 'resize') {
+      this.browserWindow.on('resize', () => handler(this));
     }
   }
 }

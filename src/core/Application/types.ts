@@ -5,10 +5,15 @@ export interface App {
 
 export type Platform = 'darwin' | 'win32' | 'linux';
 
-export type WindowEvent = 'ready-to-show';
+export type WindowEvent = 'ready-to-show' | 'resize';
 
 export interface WindowEventHandler {
   (window: AppWindow): void | Promise<void>;
+}
+
+export interface WindowSize {
+  width: number;
+  height: number;
 }
 
 export interface AppWindow {
@@ -18,6 +23,7 @@ export interface AppWindow {
   close: () => void;
   resize: (width: number, height: number) => void;
   on: (event: WindowEvent, handler: WindowEventHandler) => void;
+  getSize: () => WindowSize;
 }
 
 export type WindowOptions = {
