@@ -2,6 +2,7 @@ import { describe, expect, test } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { AppTemplate } from './AppTemplate';
 import { TitleBar } from '../molecules/TitleBar';
+import { StatusBar } from '../molecules/StatusBar/StatusBar';
 
 describe('App Template', () => {
   test('it should render children components', () => {
@@ -24,7 +25,7 @@ describe('App Template', () => {
     expect(defaultTitleBar).toBeInTheDocument();
   });
 
-  test('it should render title bar if provided', () => {
+  test('it should render title bar', () => {
     render(
       <AppTemplate titleBar={<TitleBar title='Test Title Bar' />} />
     );
@@ -32,5 +33,13 @@ describe('App Template', () => {
     const titleBarElement = screen.getByText('Test Title Bar');
 
     expect(titleBarElement).toBeInTheDocument();
+  });
+
+  test('it should render status bae', () => {
+    render(<AppTemplate statusBar={<StatusBar />} />);
+
+    const statusBarElement = screen.getByText(/^\d+\.\d+\.\d+(-.+)?$/);
+
+    expect(statusBarElement).toBeInTheDocument();
   });
 });
