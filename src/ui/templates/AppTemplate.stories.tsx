@@ -1,11 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { AppTemplate } from './AppTemplate';
-import { TitleBar } from '../atoms/TitleBar';
 
 const meta = {
   component: AppTemplate,
   args: {
-    titleBar: undefined,
     children: undefined,
   },
   argTypes: {
@@ -18,7 +16,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   render: () => (
-    <AppTemplate titleBar={<TitleBar title='Kommita' />}>
+    <AppTemplate>
       <h1 className='text-center'>Hello world!</h1>
     </AppTemplate>
   )
