@@ -1,13 +1,13 @@
 import { HashRouter, Route, Routes } from 'react-router-dom';
 import { StrictMode } from 'react';
-import { HomePage } from './pages/HomePage';
+import { Home } from './Views/Home';
 
 export function App() {
   return (
     <StrictMode>
       <HashRouter>
         <Routes>
-          <Route path='/' element={<HomePage />} />
+          <Route path='/' element={<Home />} />
         </Routes>
       </HashRouter>
     </StrictMode>
