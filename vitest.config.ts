@@ -58,7 +58,7 @@ export default defineConfig({
         '**/types.ts',
         '**/__*.ts',
         'src/ui/App.tsx',
-        'src/ui/pages/**/*.tsx',
+        'src/ui/Views/**/*.tsx',
         'src/ui/**/*.mdx',
         'src/ui/**/*.stories.@(js|jsx|mjs|ts|tsx)'
       ],
